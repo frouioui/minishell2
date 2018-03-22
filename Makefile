@@ -11,7 +11,10 @@ SRCS	= ./src/check_args.c \
 	./src/initialisation_shell/copy_environement.c \
 	./src/initialisation_shell/initialisation_shell.c \
 	./src/initialisation_shell/set_env_echec_mode.c \
-	./src/initialisation_shell/initialisation_backup.c
+	./src/initialisation_shell/initialisation_backup.c \
+	./src/shell_loop/parsing/get_command_line.c \
+	./src/shell_loop/parsing/get_number_instruction.c \
+	./src/shell_loop/shell_loop.c
 
 SRC_MAIN	= ./src/main.c \
 
@@ -23,7 +26,8 @@ SRCS_TEST	= ./tests/get_next_line_test.c \
 		./tests/copy_environement_test.c \
 		./tests/set_env_echec_mode_test.c \
 		./tests/initialisation_backup_test.c \
-		./tests/initialisation_shell_test.c
+		./tests/initialisation_shell_test.c \
+		./tests/get_number_instruction_test.c
 
 LIB	= ./lib/my_putchar.c \
 	./lib/get_next_line.c \

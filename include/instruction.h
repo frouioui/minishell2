@@ -10,6 +10,8 @@
 
 #include <stdbool.h>
 
+#define CHAR_INSTRUCTION_SEPARATOR  ';'
+
 typedef enum type_redirect_s {
 	STDOUT_SIMPLE,
 	STDOUT_DOUBLE,
@@ -36,5 +38,8 @@ typedef struct command_line_s {
 	unsigned int number_instruction;
 	instruction_t **instruction;
 } command_line_t;
+
+unsigned int get_number_instruction(char *user_input);
+command_line_t *get_command_line(char *user_input);
 
 #endif /* end of include guard: INSTRUCTION_H */
