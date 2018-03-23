@@ -24,3 +24,10 @@ Test(get_number_instruction_2, 2_instructions)
 	cr_assert_eq(get_number_instruction("/bin/ls ;;; grep toto"), 2);
 	cr_assert_eq(get_number_instruction("./a.out ; cat report"), 2);
 }
+
+Test(get_number_instruction_3, 3_instructions)
+{
+	cr_assert_eq(get_number_instruction("ls ; cat toto ;; grep tt ;"), 3);
+	cr_assert_eq(get_number_instruction("/bin/ls ; ; grep toto ;ls "), 3);
+	cr_assert_eq(get_number_instruction("gitkraken ; cat report :; t"), 3);
+}

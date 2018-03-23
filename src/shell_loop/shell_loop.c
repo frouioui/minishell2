@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "shell.h"
+#include "mylib.h"
 
 unsigned int shell_loop(shell_t *shell)
 {

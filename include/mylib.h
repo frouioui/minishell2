@@ -16,5 +16,6 @@ char *get_next_line(int fd);
 unsigned int my_number_row(char **array);
 char *my_strcpy(char *dest, char *src);
 char *my_get_env(char **env, char *target);
+char **cut_line(char *line);
 
 #endif /* end of include guard: LIBMY_H */
