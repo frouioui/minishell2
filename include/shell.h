@@ -31,5 +31,6 @@ char **copy_environement(char **origin);
 shell_t *initialisation_shell(char **env);
 char **copy_environement(char **origin);
 backup_t *initialisation_backup(char **env);
+unsigned int shell_loop(shell_t *shell);
 
 #endif /* end of include guard: SHELL_H */

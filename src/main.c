@@ -16,5 +16,8 @@ int main(int argc, char **argv, char **env)
 		return (FAILURE);
 	shell = initialisation_shell(env);
 	if (shell == NULL)
+		return (FAILURE);
+	if (shell_loop(shell) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }

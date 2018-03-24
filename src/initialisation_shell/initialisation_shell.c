@@ -22,10 +22,8 @@ shell_t *initialisation_shell(char **env)
 	if (shell->env == NULL)
 		return (NULL);
 	shell->backup = initialisation_backup(shell->env);
-	shell->command_line = malloc(sizeof(command_line_t));
-	if (shell->command_line == NULL || shell->backup == NULL)
+	shell->command_line = NULL;
+	if (shell->backup == NULL)
 		return (NULL);
-	shell->command_line->instruction = NULL;
-	shell->command_line->number_instruction = 0;
 	return (shell);
 }
