@@ -17,7 +17,8 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/shell_loop.c \
 	./src/shell_loop/parsing/get_pipe_number.c \
 	./src/shell_loop/parsing/fill_up_instruction.c \
-	./src/shell_loop/parsing/get_pipe.c
+	./src/shell_loop/parsing/get_pipe.c \
+	./src/shell_loop/parsing/get_redirect.c
 
 SRC_MAIN	= ./src/main.c \
 
@@ -32,7 +33,9 @@ SRCS_TEST	= ./tests/get_next_line_test.c \
 		./tests/initialisation_shell_test.c \
 		./tests/get_number_instruction_test.c \
 		./tests/get_pipe_number_test.c \
-		./tests/get_pipe_test.c
+		./tests/get_pipe_test.c \
+		./tests/analyse_redirect_test.c \
+		./tests/analyse_redirect_2_test.c \
 
 LIB	= ./lib/my_putchar.c \
 	./lib/get_next_line.c \

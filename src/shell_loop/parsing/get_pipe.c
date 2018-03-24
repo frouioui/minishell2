@@ -71,15 +71,14 @@ pipe_t **get_pipe(instruction_t *instruction)
 		pipe[i] = malloc(sizeof(pipe_t));
 		if (pipe[i] == NULL)
 			return (NULL);
+		pipe[i]->valid = true;
 		pipe[i + 1] = NULL;
 	}
 	if (get_full_pipe(pipe, instruction) == FAILURE)
 		return (NULL);
 	if (get_args_pipe(pipe) == FAILURE)
 		return (NULL);
-/*
-	if (get_redirect(pipe) == FAILURE)
+	if (get_redirect(pipe, instruction->number_of_pipe) == FAILURE)
 		return (NULL);
-*/
 	return (pipe);
 }
