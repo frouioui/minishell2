@@ -15,11 +15,13 @@ Test(get_pipe_1, 1_pipe_value, .timeout = 0.1)
 	instruction_t *inst = malloc(sizeof(instruction_t));
 	pipe_t **pipe = NULL;
 	char str[] = "ls -l";
+	char **env = malloc(sizeof(char *));
 
+	env[0] = my_strcpy(env[0], "TOTO=/bin");
 	inst->full_instruction = my_strcpy(inst->full_instruction, str);
 	inst->number_of_pipe = 1;
 	inst->actual_pipe = 0;
-	pipe = get_pipe(inst);
+	pipe = get_pipe(inst, env);
 	cr_assert_not_null(pipe);
 	cr_assert_str_eq(pipe[0]->full_instruction, "ls -l");
 	cr_assert_str_eq(pipe[0]->args[0], "ls");
@@ -31,11 +33,13 @@ Test(get_pipe_1, 2_pipes_value, .timeout = 0.1)
 	instruction_t *inst = malloc(sizeof(instruction_t));
 	pipe_t **pipe = NULL;
 	char str[] = "ls -l | grep \"tty\"";
+	char **env = malloc(sizeof(char *));
 
+	env[0] = my_strcpy(env[0], "TOTO=/bin");
 	inst->full_instruction = my_strcpy(inst->full_instruction, str);
 	inst->number_of_pipe = 2;
 	inst->actual_pipe = 0;
-	pipe = get_pipe(inst);
+	pipe = get_pipe(inst, env);
 	cr_assert_not_null(pipe);
 	cr_assert_not_null(pipe[0]);
 	cr_assert_not_null(pipe[1]);

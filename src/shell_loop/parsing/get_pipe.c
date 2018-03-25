@@ -10,12 +10,13 @@
 #include "instruction.h"
 #include "mylib.h"
 
-static unsigned int get_args_pipe(pipe_t **pipe)
+static unsigned int get_args_pipe(pipe_t **pipe, char **env)
 {
 	for (unsigned int i = 0; pipe[i]; i++) {
 		pipe[i]->args = cut_line(pipe[i]->full_instruction);
 		if (pipe[i]->args == NULL)
 			return (FAILURE);
+		check_env_variable(pipe[i]->args, env);
 	}
 	return (SUCCESS);
 }
@@ -60,7 +61,7 @@ static unsigned int get_full_pipe(pipe_t **pipe, instruction_t *inst)
 	return (SUCCESS);
 }
 
-pipe_t **get_pipe(instruction_t *instruction)
+pipe_t **get_pipe(instruction_t *instruction, char **env)
 {
 	pipe_t **pipe = malloc(sizeof(pipe_t *) *
 	(instruction->number_of_pipe + 1));
@@ -76,7 +77,7 @@ pipe_t **get_pipe(instruction_t *instruction)
 	}
 	if (get_full_pipe(pipe, instruction) == FAILURE)
 		return (NULL);
-	if (get_args_pipe(pipe) == FAILURE)
+	if (get_args_pipe(pipe, env) == FAILURE)
 		return (NULL);
 	if (get_redirect(pipe, instruction->number_of_pipe) == FAILURE)
 		return (NULL);

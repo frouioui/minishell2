@@ -46,7 +46,7 @@ static unsigned int get_instruction(command_line_t *command, char *input)
 	return (SUCCESS);
 }
 
-command_line_t *get_command_line(char *user_input)
+command_line_t *get_command_line(char *user_input, char **env)
 {
 	command_line_t *command_line = malloc(sizeof(command_line_t));
 
@@ -60,7 +60,7 @@ command_line_t *get_command_line(char *user_input)
 	command_line->instruction[command_line->number_instruction] = NULL;
 	if (get_instruction(command_line, user_input) == FAILURE)
 		return (NULL);
-	if (fill_up_instruction(command_line->instruction) == FAILURE)
+	if (fill_up_instruction(command_line->instruction, env) == FAILURE)
 		return (NULL);
 	return (command_line);
 }

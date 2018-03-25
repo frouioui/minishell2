@@ -12,6 +12,7 @@
 
 #define INSTRUCTION_SEPARATOR  ';'
 #define PIPE_SEPARATOR '|'
+#define ENV_VARIABLE_CHAR '$'
 #define REDIRECT_CHAR(c) (c == '>' || c == '<')
 #define SPACE_TAB(c) (c == ' ' || c == '\t')
 
@@ -56,11 +57,12 @@ typedef struct command_line_s {
 } command_line_t;
 
 unsigned int get_number_instruction(char *user_input);
-command_line_t *get_command_line(char *user_input);
-unsigned int fill_up_instruction(instruction_t **insturction);
+command_line_t *get_command_line(char *user_input, char **env);
+unsigned int fill_up_instruction(instruction_t **insturction, char **env);
 unsigned int get_pipe_number(instruction_t *instruction);
-pipe_t **get_pipe(instruction_t *instruction);
+pipe_t **get_pipe(instruction_t *instruction, char **env);
 unsigned int get_redirect(pipe_t **pipe, unsigned int number_of_pipe);
 unsigned int analyse_redirect(pipe_t *pipe);
+void check_env_variable(char **args, char **env);
 
 #endif /* end of include guard: INSTRUCTION_H */

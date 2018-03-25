@@ -14,7 +14,7 @@ unsigned int shell_loop(shell_t *shell)
 	char *user_input = NULL;
 
 	while ((user_input = get_next_line(0)) != NULL) {
-		shell->command_line = get_command_line(user_input);
+		shell->command_line = get_command_line(user_input, shell->env);
 		if (shell->command_line == NULL)
 			return (FAILURE);
 	}
