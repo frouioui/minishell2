@@ -54,6 +54,7 @@ typedef struct instruction_s {
 typedef struct command_line_s {
 	unsigned int number_instruction;
 	instruction_t **instruction;
+	bool valid;
 } command_line_t;
 
 unsigned int get_number_instruction(char *user_input);
@@ -64,5 +65,6 @@ pipe_t **get_pipe(instruction_t *instruction, char **env);
 unsigned int get_redirect(pipe_t **pipe, unsigned int number_of_pipe);
 unsigned int analyse_redirect(pipe_t *pipe);
 void check_env_variable(char **args, char **env);
+void fix_extra_spaces(char *str);
 
 #endif /* end of include guard: INSTRUCTION_H */

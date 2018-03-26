@@ -20,6 +20,7 @@ static instruction_t *new_instruction(char *str)
 		(my_strlen(str) + 1));
 	if (instruction->full_instruction == NULL)
 		return (NULL);
+	instruction->valid = true;
 	return (instruction);
 }
 
@@ -39,6 +40,7 @@ static unsigned int get_instruction(command_line_t *command, char *input)
 			i++;
 			command->instruction[j]->full_instruction[a + 1] = 0;
 		}
+		fix_extra_spaces(command->instruction[j]->full_instruction);
 		for (i; input[i] && input[i] == ';' && input[i] == ' '; i++);
 		j++;
 		i++;
@@ -49,9 +51,11 @@ static unsigned int get_instruction(command_line_t *command, char *input)
 command_line_t *get_command_line(char *user_input, char **env)
 {
 	command_line_t *command_line = malloc(sizeof(command_line_t));
+	unsigned int err = 0;
 
 	if (command_line == NULL)
 		return (NULL);
+	command_line->valid = true;
 	command_line->number_instruction = get_number_instruction(user_input);
 	command_line->instruction = malloc(sizeof(instruction_t *) *
 		(command_line->number_instruction + 1));
@@ -60,7 +64,10 @@ command_line_t *get_command_line(char *user_input, char **env)
 	command_line->instruction[command_line->number_instruction] = NULL;
 	if (get_instruction(command_line, user_input) == FAILURE)
 		return (NULL);
-	if (fill_up_instruction(command_line->instruction, env) == FAILURE)
+	err = fill_up_instruction(command_line->instruction, env);
+	if (err == FAILURE)
 		return (NULL);
+	else if (err == SKIP)
+		command_line->valid = false;
 	return (command_line);
 }
