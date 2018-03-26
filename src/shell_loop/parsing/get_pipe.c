@@ -21,22 +21,6 @@ static unsigned int get_args_pipe(pipe_t **pipe, char **env)
 	return (SUCCESS);
 }
 
-static void fix_extra_spaces(char *str)
-{
-	int size = my_strlen(str) - 1;
-	int i;
-	int a;
-
-	for (i = 0; str[i] && (str[i] == ' ' || str[i] == '\t'); i++);
-	for (a = 0; str[a + i]; a++)
-		str[a] = str[a + i];
-	str[a] = '\0';
-	while ((str[size] == ' ' || str[size] == '\t') && size > 0) {
-		str[size] = '\0';
-		size--;
-	}
-}
-
 static unsigned int get_full_pipe(pipe_t **pipe, instruction_t *inst)
 {
 	unsigned int j = 0;

@@ -11,6 +11,7 @@
 #include "instruction.h"
 
 #define SUCCESS 0
+#define SKIP 21
 #define FAILURE 84
 
 typedef struct backup_s {

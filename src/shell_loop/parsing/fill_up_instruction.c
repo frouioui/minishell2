@@ -12,13 +12,16 @@
 unsigned int fill_up_instruction(instruction_t **instruction, char **env)
 {
 	for (unsigned int i = 0; instruction[i]; i++) {
-		instruction[i]->valid = true;
 		get_pipe_number(instruction[i]);
+		if (instruction[i]->valid == false)
+			return (SKIP);
 		instruction[i]->actual_pipe = 0;
 		if (instruction[i]->valid == true)
 			instruction[i]->pipe = get_pipe(instruction[i], env);
 		if (instruction[i]->valid && instruction[i]->pipe == NULL)
 			return (FAILURE);
+		if (instruction[i]->valid == false)
+			return (SKIP);
 	}
 	return (SUCCESS);
 }

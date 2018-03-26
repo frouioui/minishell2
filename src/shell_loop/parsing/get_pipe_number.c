@@ -7,6 +7,12 @@
 
 #include <stdlib.h>
 #include "instruction.h"
+#include "mylib.h"
+
+static void display_invalid_pipe(void)
+{
+	my_putstr("Invalid null command.\n");
+}
 
 static unsigned int seek_next_separator(instruction_t *instruction, int *i)
 {
@@ -14,11 +20,12 @@ static unsigned int seek_next_separator(instruction_t *instruction, int *i)
 	while (instruction->full_instruction[*i] == ' ' &&
 	instruction->full_instruction[*i])
 		(*i) += 1;
-	if (instruction->full_instruction[*i] == '\0')
-		return (0);
-	if (instruction->full_instruction[*i] == PIPE_SEPARATOR) {
+	if (instruction->full_instruction[*i] == '\0' ||
+	instruction->full_instruction[*i] == PIPE_SEPARATOR) {
 		instruction->valid = false;
 		instruction->error = INVALID_PIPE;
+		display_invalid_pipe();
+		return (0);
 	}
 	return (1);
 }
@@ -32,8 +39,8 @@ unsigned int get_pipe_number(instruction_t *instruction)
 		if (instruction->full_instruction[i] == PIPE_SEPARATOR)
 			pipe += seek_next_separator(instruction, &i);
 	}
-	instruction->number_of_pipe = pipe;
 	if (instruction->valid == false)
 		return (0);
+	instruction->number_of_pipe = pipe;
 	return (pipe);
 }
