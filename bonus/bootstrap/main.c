@@ -30,7 +30,7 @@ int main(int argc, char **argv, char **env)
 	int pid = 0;
 	int pid_2 = 0;
 
-	if (pipe(fds) == -1)
+	if pipe(fds) == -1
 		perror("pipe");
 	if ((pid = fork()) == -1)
 		perror("fork");
