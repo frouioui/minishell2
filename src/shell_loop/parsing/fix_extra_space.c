@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJET, 2018
+** EPITECH PROJECT, 2018
 ** minishell2
 ** File description:
 ** Fix all the extra space at the begining and the end of string

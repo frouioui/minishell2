@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJET, 2018
+** EPITECH PROJECT, 2018
 ** minishell2
 ** File description:
 ** Check if args == 1 and init the shell then call the shell function.

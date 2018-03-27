@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJET, 2018
+** EPITECH PROJECT, 2018
 ** minishell2
 ** File description:
 ** Test file of the get_number_instruction function

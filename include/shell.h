@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJET, 2018
+** EPITECH PROJECT, 2018
 ** minishell2
 ** File description:
 ** Include file of the main structures and functions.

@@ -24,6 +24,9 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/display_prompt.c \
 	./src/shell_loop/execution/multiple_execution.c \
 	./src/shell_loop/execution/execute_command.c \
+	./src/shell_loop/execution/check_end_exec.c \
+	./src/shell_loop/execution/create_pipe.c \
+	./src/shell_loop/execution/exec_pipe.c
 
 SRC_MAIN	= ./src/main.c \
 
