@@ -26,7 +26,15 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/execution/execute_command.c \
 	./src/shell_loop/execution/check_end_exec.c \
 	./src/shell_loop/execution/create_pipe.c \
-	./src/shell_loop/execution/exec_pipe.c
+	./src/shell_loop/execution/exec_pipe.c \
+	./src/shell_loop/execution/redirect_pipe.c \
+	./src/shell_loop/execution/error_exec.c \
+	./src/shell_loop/execution/dup_my_pipe.c \
+	./src/shell_loop/execution/get_path_exec.c \
+	./src/shell_loop/execution/get_execution_file_path.c \
+	./src/shell_loop/execution/exit_prog.c \
+	./src/shell_loop/execution/simple_execution.c \
+	./src/shell_loop/execution/check_sig.c \
 
 SRC_MAIN	= ./src/main.c \
 

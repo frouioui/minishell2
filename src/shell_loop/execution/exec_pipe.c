@@ -9,41 +9,45 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "shell.h"
 #include "instruction.h"
+#include "execution.h"
+#include "mylib.h"
 
-static void exec_parent(shell_t *shell, instruction_t *instruction, int **fd,
-	int *stat)
+static void exec_parent(shell_t *shell, instruction_t *inst, int **fd)
 {
-	unsigned int actual = instruction->actual_pipe;
+	unsigned int actual = inst->actual_pipe;
 
-	if (dup_my_pipe(instruction, actual, fd) == -1)
-		exit(84);
 	/*if (is_builtins(instruction) == true) {
+		if (dup_my_pipe(instruction, actual, fd) == -1)
+			exit(84);
 		if (exec_builtins(instruction->pipe[actual]) == -1)
 			exit(84);
 	} else {*/
-		if (execve(instruction->pipe[actual]->path_exec,
-		instruction->pipe[actual]->args, shell->env) == -1)
-			display_error_exec(instruction, actual, shell);
-		if (wait(stat) == -1)
-			perror(instruction->pipe[actual]->args[0]);
-	}
+	inst->pipe[actual]->path_exec = get_path_exec(inst->pipe[actual], shell);
+	inst->pipe[actual]->path_exec == NULL ? exit(0) : 0;
+	dup_my_pipe(inst, actual, fd) == -1 ? exit(84) : 0;
+	if (execve(inst->pipe[actual]->path_exec, inst->pipe[actual]->args, shell->env) == -1)
+		perror(inst->pipe[actual]->args[0]);
+	//}
 }
 
-void exec_pipe(shell_t *shell, instruction_t *instruction, int **fd)
+void exec_pipe(shell_t *shell, instruction_t *instruction, int **fd, pid_t pid)
 {
-	pid_t pid = 0;
+	pid_t pid2 = 0;
 	int stat = 0;
 
-	if ((pid = fork()) == -1)
+	if ((pid2 = fork()) == -1)
 		exit(84);
-	if (pid == 0) {
-		instruction->actual_pipe -= 1;
-		exec_pipe(shell, instruction, fd);
-		exit(0);
+	if (pid2 == 0) {
+		instruction->actual_pipe--;
+		if (instruction->actual_pipe > 0) {
+			exec_pipe(shell, instruction, fd, pid2);
+		} else if (instruction->actual_pipe == 0) {
+			exec_parent(shell, instruction, fd);
+		}
 	} else {
-		exec_parent(shell, instruction, fd, &stat);
+		exec_parent(shell, instruction, fd);
 	}
-	check_end_exec(stat);
 }

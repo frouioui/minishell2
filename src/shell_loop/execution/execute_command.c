@@ -15,7 +15,7 @@ unsigned int execute_command(shell_t *shell, command_line_t *command)
 		if (command->instruction[nb]->number_of_pipe > 1) {
 			multiple_execution(shell, command->instruction[nb]);
 		} else {
-			// simple execution
+			simple_execution(shell, command->instruction[nb]);
 		}
 	}
 	return (0);

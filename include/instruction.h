@@ -38,8 +38,9 @@ typedef struct pipe_s {
 	bool redirect;
 	error_syntax_t error;
 	redirect_t type_redirect;
-	int fd_redirect;
+	int fd;
 	char *file_redirect;
+	char *path_exec;
 } pipe_t;
 
 typedef struct instruction_s {
