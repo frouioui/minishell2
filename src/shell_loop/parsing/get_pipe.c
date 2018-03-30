@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJET, 2018
+** EPITECH PROJECT, 2018
 ** minishell2
 ** File description:
 ** Get the whole pipe instructions
@@ -12,6 +12,8 @@
 
 static unsigned int get_args_pipe(pipe_t **pipe, char **env)
 {
+	int a = 0;
+
 	for (unsigned int i = 0; pipe[i]; i++) {
 		pipe[i]->args = cut_line(pipe[i]->full_instruction);
 		if (pipe[i]->args == NULL)

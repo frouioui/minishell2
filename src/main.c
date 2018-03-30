@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJET, 2018
+** EPITECH PROJECT, 2018
 ** minishell2
 ** File description:
 ** Check if args == 1 and init the shell then call the shell function.
@@ -19,5 +19,5 @@ int main(int argc, char **argv, char **env)
 		return (FAILURE);
 	if (shell_loop(shell) == FAILURE)
 		return (FAILURE);
-	return (SUCCESS);
+	return (shell->code);
 }

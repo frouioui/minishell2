@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJET, 2018
+** EPITECH PROJECT, 2018
 ** minishell2
 ** File description:
 ** Fill the whole instruction structure after the expression was given
@@ -15,7 +15,8 @@ unsigned int fill_up_instruction(instruction_t **instruction, char **env)
 		get_pipe_number(instruction[i]);
 		if (instruction[i]->valid == false)
 			return (SKIP);
-		instruction[i]->actual_pipe = 0;
+		instruction[i]->actual_pipe = instruction[i]->number_of_pipe
+		- 1;
 		if (instruction[i]->valid == true)
 			instruction[i]->pipe = get_pipe(instruction[i], env);
 		if (instruction[i]->valid && instruction[i]->pipe == NULL)

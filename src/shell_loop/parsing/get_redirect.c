@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJET, 2018
+** EPITECH PROJECT, 2018
 ** minishell2
 ** File description:
 ** Get the whole pipe instructions
@@ -68,6 +68,7 @@ unsigned int analyse_redirect(pipe_t *pipe)
 unsigned int get_redirect(pipe_t **pipe, unsigned int number_of_pipe)
 {
 	for (unsigned int i = 0; i < number_of_pipe; i++) {
+		pipe[i]->redirect = false;
 		analyse_redirect(pipe[i]);
 	}
 	return (SUCCESS);
