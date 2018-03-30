@@ -37,7 +37,7 @@ static void redirect_stdin(pipe_t *pipe)
 		perror("dup2");
 }
 
-void redirect_pipe(pipe_t *pipe, int *fd)
+void redirect_pipe(pipe_t *pipe)
 {
 	//pipe->file_redirect = get_redirect_filename(pipe);
 	if (pipe->file_redirect == NULL)
@@ -45,7 +45,8 @@ void redirect_pipe(pipe_t *pipe, int *fd)
 	if (pipe->type_redirect == STDOUT_SIMPLE ||
 	pipe->type_redirect == STDOUT_DOUBLE) {
 		redirect_stdout(pipe);
-	} else {
+	} else if (pipe->type_redirect == STDIN_SIMPLE ||
+	pipe->type_redirect == STDIN_DOUBLE) {
 		redirect_stdin(pipe);
 	}
 }

@@ -15,6 +15,9 @@
 #define ENV_VARIABLE_CHAR '$'
 #define REDIRECT_CHAR(c) (c == '>' || c == '<')
 #define SPACE_TAB(c) (c == ' ' || c == '\t')
+#define DIGIT(c) (c >= '0' && c <= '9')
+#define ALPHA(c) ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+#define ALPHANUM(c) (DIGIT(c) || ALPHA(c))
 
 typedef enum type_redirect_s {
 	EMPTY_REDIR,

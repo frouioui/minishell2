@@ -23,6 +23,8 @@ shell_t *initialisation_shell(char **env)
 		return (NULL);
 	shell->backup = initialisation_backup(shell->env);
 	shell->command_line = NULL;
+	shell->code = 0;
+	shell->state = OK;
 	if (shell->backup == NULL)
 		return (NULL);
 	return (shell);

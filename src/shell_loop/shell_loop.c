@@ -13,14 +13,13 @@
 unsigned int shell_loop(shell_t *shell)
 {
 	char *user_input = NULL;
-	unsigned int err = 0;
 
 	display_prompt(shell);
-	while ((user_input = get_next_line(0)) != NULL) {
+	while (shell->state == OK && (user_input = get_next_line(0)) != NULL) {
 		shell->command_line = get_command_line(user_input, shell->env);
 		if (shell->command_line == NULL)
 			return (FAILURE);
-		err = execute_command(shell, shell->command_line);
+		shell->state = execute_command(shell, shell->command_line);
 		display_prompt(shell);
 	}
 	return (SUCCESS);

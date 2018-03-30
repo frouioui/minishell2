@@ -8,28 +8,40 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <stdlib.h>
+#include <string.h>
 #include "mylib.h"
 
-static void core_dumped(int status)
+char *add_core_dump(char *base)
 {
-	if (status == 11)
-		my_putstr("Segmentation fault (core dumped)\n");
+	int i = my_strlen(base);
+	char *str = " (core dumped)\n";
+	char *new = malloc(sizeof(char) * (i + my_strlen(str) + 2));
+
+	if (new == NULL)
+		exit(84);
+	my_strcpy(new, base);
+	for (int a = 0; str[a]; a++) {
+		new[i] = str[a];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
 }
 
-static void core_not_dumped(int status)
+void check_sig(int stat)
 {
-	if (status == 11)
-		my_putstr("Segmentation fault\n");
-}
+	char *str = NULL;
+	int nb = (stat >= 128 ? stat - 128 : stat);
 
-void check_sig(int status)
-{
-	if (WIFSIGNALED(status)) {
-		if (WCOREDUMP(status))
-			core_dumped(status);
-		else
-			core_not_dumped(status);
-	} else if (WIFSTOPPED(status)) {
+	if (WIFSIGNALED(stat)) {
+		str = my_strcpy(NULL, sys_siglist[nb]);
+		if (WCOREDUMP(stat))
+			str = add_core_dump(str);
+		my_putstr(str);
+	} else if (WIFSTOPPED(stat)) {
 		my_putstr("Stopped\n");
 	}
+	if (str != NULL)
+		free(str);
 }

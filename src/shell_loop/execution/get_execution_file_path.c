@@ -40,28 +40,28 @@ static void roll_back_path(char *path, int roll_back)
 	}
 }
 
-static int get_file_name(char *user)
+static int get_file_name(char *exec)
 {
 	int i = 0;
 	int gap = 0;
 
-	if (user[0] != '.')
+	if (exec[0] != '.')
 		return (-42);
-	while (user[i] == '.' || user[i] == '/')
+	while (exec[i] == '.' || exec[i] == '/')
 		i++;
 	gap = i - 1;
-	user[0] = '/';
-	while (user[i] != '\0') {
-		user[i - gap] = user[i];
+	exec[0] = '/';
+	while (exec[i] != '\0') {
+		exec[i - gap] = exec[i];
 		i++;
 	}
-	user[i - gap] = '\0';
+	exec[i - gap] = '\0';
 	return (0);
 }
 
 char *get_execution_file_path(char *exec, shell_t *shell)
 {
-	char *path = my_strcpy(NULL, shell->backup->path);
+	char *path = my_strcpy(NULL, shell->backup->current_pwd);
 	char *file = malloc(sizeof(char) * my_strlen(path) + my_strlen(exec));
 	int roll_back = count_rollback(exec);
 	int a = 0;

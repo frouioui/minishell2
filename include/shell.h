@@ -21,10 +21,19 @@ typedef struct backup_s {
 	char *current_pwd;
 } backup_t;
 
+typedef enum state_s {
+	OK,
+	EXIT,
+	ERROR_84,
+	ERROR_1
+} state_t;
+
 typedef struct shell_s {
 	char **env;
 	backup_t *backup;
 	command_line_t *command_line;
+	state_t state;
+	int code;
 } shell_t;
 
 int check_args(int argc);

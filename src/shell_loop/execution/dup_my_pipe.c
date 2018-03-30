@@ -17,7 +17,7 @@ static void dup_first(pipe_t *pipe, int *fd)
 		if (dup2(fd[1], 1) == -1)
 			perror("dup");
 	} else {
-		redirect_pipe(pipe, fd);
+		redirect_pipe(pipe);
 	}
 }
 
@@ -28,7 +28,7 @@ static void dup_last(pipe_t *pipe, int *fd)
 			perror("dup");
 		close(fd[1]);
 	} else {
-		redirect_pipe(pipe, fd);
+		redirect_pipe(pipe);
 	}
 }
 
@@ -43,7 +43,7 @@ static void dup_between(pipe_t *pipe, int *fd, int *fd2)
 		if (dup2(fd2[0], 0) == -1)
 			perror("dup");
 	if (pipe->redirect == true)
-		redirect_pipe(pipe, fd);
+		redirect_pipe(pipe);
 }
 
 int dup_my_pipe(instruction_t *instruction, unsigned int actual, int **fd)

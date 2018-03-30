@@ -60,8 +60,10 @@ char *get_path_exec(pipe_t *pipe, shell_t *shell)
 	path == NULL ? path = my_strcpy(path, shell->backup->path) : 0;
 	filename = get_path_builtin(path, pipe->args[0], shell);
 	if (filename == NULL)
-		filename = get_execution_file_path(pipe->args[0], shell);
-	if (filename == NULL)
+		filename = get_execution_file_path(
+			my_strcpy(NULL, pipe->args[0]), shell);
+	if (filename == NULL) {
 		display_error_execution(pipe->args[0]);
+	}
 	return (filename);
 }

@@ -12,7 +12,7 @@
 char **copy_environement(char **origin)
 {
 	unsigned int number_row = my_number_row(origin);
-	char **env = malloc(sizeof(char *) * (number_row + 1));
+	char **env = malloc(sizeof(char *) * (number_row * 10));
 
 	if (env == NULL)
 		return (NULL);
@@ -21,6 +21,7 @@ char **copy_environement(char **origin)
 		if (env[i] == NULL)
 			return (NULL);
 		my_strcpy(env[i], origin[i]);
+		env[i + 1] = NULL;
 	}
 	env[number_row] = NULL;
 	return (env);
