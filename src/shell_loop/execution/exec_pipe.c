@@ -16,10 +16,11 @@
 #include "execution.h"
 #include "mylib.h"
 
-void bad_archi(char *arg)
+void bad_archi(shell_t *shell, char *arg)
 {
 	my_putstr(arg);
 	my_putstr(": Exec format error. Wrong Architecture.\n");
+	shell->code = 1;
 }
 
 static int exec_parent(shell_t *shell, instruction_t *inst, int **fd)
@@ -27,20 +28,20 @@ static int exec_parent(shell_t *shell, instruction_t *inst, int **fd)
 	unsigned int actual = inst->actual_pipe;
 
 	if (is_builtins(inst->pipe[actual]->args[0]) == true) {
-		if (dup_my_pipe(inst, actual, fd) == -1)
-			exit(84);
-		if (exec_builtins(shell, inst->pipe[actual]) == -1)
-			exit(84);
+		dup_my_pipe(inst, actual, fd) == -1 ? exit(84) : 0;
+		exec_builtins(shell, inst->pipe[actual]) == -1 ? exit(84) : 0;
 		exit(-6);
 	} else {
 		inst->pipe[actual]->path_exec =
 		get_path_exec(inst->pipe[actual], shell);
-		inst->pipe[actual]->path_exec == NULL ? exit(84) : 0;
+		inst->pipe[actual]->path_exec == NULL ? shell->code = 1 : 0;
+		shell->code == 1 ? exit(shell->code) : 0;
 		dup_my_pipe(inst, actual, fd) == -1 ? exit(84) : 0;
 		if (execve(inst->pipe[actual]->path_exec,
 		inst->pipe[actual]->args, shell->env) == -1)
-			errno == 8 ? bad_archi(inst->pipe[actual]->args[0])
-			: perror(inst->pipe[actual]->args[0]);
+			errno == 8 ? bad_archi(shell, inst->pipe[actual]->
+			args[0]) : folder_error(shell,
+				errno, inst->pipe[actual]-> args[0]);
 		exit(0);
 	}
 	return (shell->state);
@@ -61,6 +62,6 @@ void exec_pipe(shell_t *shell, instruction_t *instruction, int **fd, pid_t pid)
 			shell->state = exec_parent(shell, instruction, fd);
 		}
 	} else {
-		shell->state = 	exec_parent(shell, instruction, fd);
+		shell->state = exec_parent(shell, instruction, fd);
 	}
 }

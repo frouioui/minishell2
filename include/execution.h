@@ -38,7 +38,8 @@ char *get_execution_file_path(char *exec, shell_t *shell);
 void exit_prog(int code);
 void simple_execution(shell_t *shell, instruction_t *instruction);
 void check_sig(int status);
-void bad_archi(char *arg);
+void bad_archi(shell_t *shell, char *arg);
+char *get_redirect_filename(pipe_t *pipe);
 
 /* --- builtins functions --- */
 int exec_builtins(shell_t *shell, pipe_t *pipe);
