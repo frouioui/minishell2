@@ -47,6 +47,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/execution/exit_prog.c \
 	./src/shell_loop/execution/simple_execution.c \
 	./src/shell_loop/execution/check_sig.c \
+	./src/shell_loop/execution/close_redirect.c
 
 SRC_MAIN	= ./src/main.c \
 
