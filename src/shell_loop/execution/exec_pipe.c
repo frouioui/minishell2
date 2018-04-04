@@ -28,10 +28,8 @@ static int exec_parent(shell_t *shell, instruction_t *inst, int **fd)
 	unsigned int actual = inst->actual_pipe;
 
 	if (is_builtins(inst->pipe[actual]->args[0]) == true) {
-		if (dup_my_pipe(inst, actual, fd) == -1)
-			exit(84);
-		if (exec_builtins(shell, inst->pipe[actual]) == -1)
-			exit(84);
+		dup_my_pipe(inst, actual, fd) == -1 ? exit(84) : 0;
+		exec_builtins(shell, inst->pipe[actual]) == -1 ? exit(84) : 0;
 		exit(-6);
 	} else {
 		inst->pipe[actual]->path_exec =
@@ -42,7 +40,8 @@ static int exec_parent(shell_t *shell, instruction_t *inst, int **fd)
 		if (execve(inst->pipe[actual]->path_exec,
 		inst->pipe[actual]->args, shell->env) == -1)
 			errno == 8 ? bad_archi(shell, inst->pipe[actual]->
-			args[0]) : perror(inst->pipe[actual]->args[0]);
+			args[0]) : folder_error(shell,
+				errno, inst->pipe[actual]-> args[0]);
 		exit(0);
 	}
 	return (shell->state);
@@ -63,6 +62,6 @@ void exec_pipe(shell_t *shell, instruction_t *instruction, int **fd, pid_t pid)
 			shell->state = exec_parent(shell, instruction, fd);
 		}
 	} else {
-		shell->state = 	exec_parent(shell, instruction, fd);
+		shell->state = exec_parent(shell, instruction, fd);
 	}
 }

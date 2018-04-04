@@ -25,7 +25,7 @@ void folder_error(shell_t *shell, int err, char *folder)
 		display_folder_error(shell, folder, ": Permission denied.\n");
 	if (err == EISDIR)
 		display_folder_error(shell, folder, ": Is a directory.\n");
-	if (err == ENOENT)
+	if (err == ENOENT || err == 0)
 		display_folder_error(shell,
 			folder, ": No such file or directory.\n");
 }

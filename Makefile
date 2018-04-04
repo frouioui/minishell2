@@ -15,6 +15,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/parsing/get_command_line.c \
 	./src/shell_loop/parsing/get_number_instruction.c \
 	./src/shell_loop/shell_loop.c \
+	./src/shell_loop/free_array_string.c \
 	./src/shell_loop/parsing/get_pipe_number.c \
 	./src/shell_loop/parsing/fill_up_instruction.c \
 	./src/shell_loop/parsing/get_pipe.c \
@@ -33,6 +34,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/execution/builtins/put_new_old_pwd.c \
 	./src/shell_loop/execution/builtins/error_wrong_folder.c \
 	./src/shell_loop/execution/builtins/save_old_pwd.c \
+	./src/shell_loop/execution/get_redirected.c \
 	./src/shell_loop/execution/multiple_execution.c \
 	./src/shell_loop/execution/execute_command.c \
 	./src/shell_loop/execution/create_pipe.c \

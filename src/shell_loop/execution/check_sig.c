@@ -34,8 +34,15 @@ void check_sig(int stat)
 	char *str = NULL;
 	int nb = (stat >= 128 ? stat - 128 : stat);
 
+	if (nb == SIGFPE) {
+		if (WCOREDUMP(stat))
+			my_putstr("Floating exception (core dumped)\n");
+		else
+			my_putstr("Floating exception\n");
+		return;
+	}
 	if (WIFSIGNALED(stat)) {
-		str = my_strcpy(NULL, sys_siglist[nb]);
+		str = my_strcpy(NULL, (char *)sys_siglist[nb]);
 		if (WCOREDUMP(stat))
 			str = add_core_dump(str);
 		my_putstr(str);
