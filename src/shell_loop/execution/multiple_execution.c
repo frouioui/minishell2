@@ -14,7 +14,7 @@
 #include "instruction.h"
 #include "execution.h"
 
-static void wait_all(int *stat, shell_t *shell, instruction_t *inst, int **fd)
+static void wait_all(pid_t pid, int *stat, shell_t *shell, instruction_t *inst, int **fd)
 {
 	unsigned int i = 0;
 	unsigned int nb_pipe;
@@ -22,10 +22,11 @@ static void wait_all(int *stat, shell_t *shell, instruction_t *inst, int **fd)
 	if (stat == NULL)
 		exit(84);
 	while (i < inst->number_of_pipe - 1) {
+		close(fd[i][0]);
 		close(fd[i][1]);
-		close(fd[i++][0]);
+		i++;
 	}
-	for (unsigned int i = 1; i < inst->number_of_pipe + 1; i++) {
+	for (i = 0; i < inst->number_of_pipe - 1; i++) {
 		wait(&(stat[i]));
 		if (stat[i] == 250)
 			exit(shell->code);
@@ -57,6 +58,6 @@ void multiple_execution(shell_t *shell, instruction_t *instruction)
 	if (pid == 0) {
 		exec_pipe(shell, instruction, fd, pid);
 	} else {
-		wait_all(stat, shell, instruction, fd);
+		wait_all(pid, stat, shell, instruction, fd);
 	}
 }

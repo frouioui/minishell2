@@ -37,27 +37,31 @@ int main(int argc, char **argv, char **env)
 	if ((pid = fork()) == -1)
 		perror("fork");
 	if (pid == 0) {
+		printf("pid = %d\n", pid);
 		pid_2 = fork();
 		if (pid_2 == -1)
 			perror("fork");
 		if (pid_2 == 0) {
+			close(pipe_2[0]);
 			dup2(pipe_2[1], 1);
 			execve(args1[0], args1, env);
-			close(pipe_2[1]);
 			exit(0);
 		} else {
+			printf("%d\n", pid_2);
+			printf("end wait grep\n");
+			close(pipe_2[1]);
+			close(pipe_1[0]);
 			dup2(pipe_2[0], 0);
 			dup2(pipe_1[1], 1);
 			execve(args2[0], args2, env);
-			wait(NULL);
-			close(pipe_2[0]);
-			close(pipe_1[1]);
 			exit(0);
 		}
 	} else {
+		printf("begin wait\n");
+		printf("end wait parent\n");
+		close(pipe_1[1]);
 		dup2(pipe_1[0], 0);
 		execve(args3[0], args3, env);
-		wait(NULL);
 		close(pipe_1[0]);
 	}
 	return (0);
