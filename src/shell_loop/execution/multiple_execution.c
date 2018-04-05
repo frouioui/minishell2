@@ -27,7 +27,7 @@ static void wait_all(int *stat, shell_t *shell, instruction_t *inst, int **fd)
 	}
 	for (unsigned int i = 1; i < inst->number_of_pipe + 1; i++) {
 		wait(&(stat[i]));
-		if (stat[i] / 256 == 250)
+		if (stat[i] == 250)
 			exit(shell->code);
 		stat[i] == 0 && shell->code != 0 ? 0 :
 		(shell->code = stat[i] / 256);

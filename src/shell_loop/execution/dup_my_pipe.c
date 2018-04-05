@@ -16,6 +16,7 @@ static void dup_first(pipe_t *pipe, int *fd)
 	if (pipe->redirect == false) {
 		if (dup2(fd[1], 1) == -1)
 			perror("dup");
+		close(fd[0]);
 	} else {
 		redirect_pipe(pipe);
 	}
@@ -38,10 +39,12 @@ static void dup_between(pipe_t *pipe, int *fd, int *fd2)
 	pipe->type_redirect != STDOUT_DOUBLE)
 		if (dup2(fd[1], 1) == -1)
 			perror("dup");
+		close(fd[0]);
 	if (pipe->type_redirect != STDIN_SIMPLE &&
 	pipe->type_redirect != STDIN_DOUBLE)
 		if (dup2(fd2[0], 0) == -1)
 			perror("dup");
+		close(fd2[1]);
 	if (pipe->redirect == true)
 		redirect_pipe(pipe);
 }
