@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** PSU_minishell2_2017
 ** File description:
-** __DESCRIPTION__
+** Clear the pipe's substrings, and get the file name of the redirection
 */
 
 #include <sys/types.h>
@@ -32,6 +32,7 @@ static char *cut_filename(char *instruction)
 		filename[a] = instruction[i];
 		i++;
 		a++;
+		filename[a] = '\0';
 	}
 	return (filename);
 }

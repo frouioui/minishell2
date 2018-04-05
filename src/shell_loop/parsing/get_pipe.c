@@ -23,20 +23,26 @@ static unsigned int get_args_pipe(pipe_t **pipe, char **env)
 	return (SUCCESS);
 }
 
+static void clean_next_char(pipe_t **pipe, int i, int a)
+{
+	pipe[i]->full_instruction[a + 1] = '\0';
+	pipe[i]->full_instruction[a + 2] = '\0';
+}
+
 static unsigned int get_full_pipe(pipe_t **pipe, instruction_t *inst)
 {
 	unsigned int j = 0;
 
 	for (unsigned int i = 0; i < inst->number_of_pipe; i++) {
 		pipe[i]->full_instruction = malloc(sizeof(char) *
-		my_strlen(inst->full_instruction) + 1);
+		(my_strlen(inst->full_instruction) + 2));
 		if (pipe[i]->full_instruction == NULL)
 			return (FAILURE);
 		for (int a = 0; inst->full_instruction[j] &&
 		inst->full_instruction[j] != PIPE_SEPARATOR; a++) {
 			pipe[i]->full_instruction[a] =
 			inst->full_instruction[j];
-			pipe[i]->full_instruction[a + 1] = '\0';
+			clean_next_char(pipe, i, a);
 			j++;
 		}
 		fix_extra_spaces(pipe[i]->full_instruction);

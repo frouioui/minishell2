@@ -36,13 +36,13 @@ static int exec_parent(shell_t *shell, instruction_t *inst, int **fd)
 		get_path_exec(inst->pipe[actual], shell);
 		inst->pipe[actual]->path_exec == NULL ? shell->code = 1 : 0;
 		shell->code == 1 ? exit(shell->code) : 0;
-		dup_my_pipe(inst, actual, fd) == -1 ? exit(84) : 0;
+		dup_my_pipe(inst, actual, fd) == -1 ? exit(1) : 0;
 		if (execve(inst->pipe[actual]->path_exec,
 		inst->pipe[actual]->args, shell->env) == -1)
 			errno == 8 ? bad_archi(shell, inst->pipe[actual]->
 			args[0]) : folder_error(shell,
 				errno, inst->pipe[actual]-> args[0]);
-		exit(0);
+		exit(1);
 	}
 	return (shell->state);
 }
@@ -56,11 +56,10 @@ void exec_pipe(shell_t *shell, instruction_t *instruction, int **fd, pid_t pid)
 		exit(84);
 	if (pid2 == 0) {
 		instruction->actual_pipe--;
-		if (instruction->actual_pipe > 0) {
+		if (instruction->actual_pipe > 0)
 			exec_pipe(shell, instruction, fd, pid2);
-		} else if (instruction->actual_pipe == 0) {
+		else if (instruction->actual_pipe == 0)
 			shell->state = exec_parent(shell, instruction, fd);
-		}
 	} else {
 		shell->state = exec_parent(shell, instruction, fd);
 	}

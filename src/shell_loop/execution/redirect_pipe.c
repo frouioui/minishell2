@@ -45,6 +45,8 @@ static void redirect_stdin(pipe_t *pipe)
 
 void redirect_pipe(pipe_t *pipe)
 {
+	if (pipe->redirect == false)
+		return;
 	pipe->file_redirect = get_redirect_filename(pipe);
 	if (pipe->file_redirect == NULL)
 		exit(84);

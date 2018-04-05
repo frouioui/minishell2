@@ -44,5 +44,6 @@ backup_t *initialisation_backup(char **env);
 unsigned int shell_loop(shell_t *shell);
 void display_prompt(shell_t *shell);
 void free_array_string(char **array);
+void update_backup(shell_t *shell);
 
 #endif /* end of include guard: SHELL_H */
