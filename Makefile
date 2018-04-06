@@ -15,6 +15,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/parsing/get_command_line.c \
 	./src/shell_loop/parsing/get_number_instruction.c \
 	./src/shell_loop/shell_loop.c \
+	./src/shell_loop/is_command_valid.c \
 	./src/shell_loop/update_backup.c \
 	./src/shell_loop/free_array_string.c \
 	./src/shell_loop/parsing/get_pipe_number.c \

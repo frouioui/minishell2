@@ -4,6 +4,5 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-bad_archi	/home/pflorent/Delivery/SHELL/Minishell_2/PSU_minishell2_2017/src/shell_loop/execution/exec_pipe.c	/^void bad_archi(shell_t *shell, char *arg)$/;"	function	line:19	signature:(shell_t *shell, char *arg)
-exec_parent	/home/pflorent/Delivery/SHELL/Minishell_2/PSU_minishell2_2017/src/shell_loop/execution/exec_pipe.c	/^static int exec_parent(shell_t *shell, instruction_t *inst, int **fd)$/;"	function	line:26	file:	signature:(shell_t *shell, instruction_t *inst, int **fd)
-exec_pipe	/home/pflorent/Delivery/SHELL/Minishell_2/PSU_minishell2_2017/src/shell_loop/execution/exec_pipe.c	/^void exec_pipe(shell_t *shell, instruction_t *instruction, int **fd, pid_t pid)$/;"	function	line:50	signature:(shell_t *shell, instruction_t *instruction, int **fd, pid_t pid)
+display_error	/home/pflorent/Delivery/SHELL/Minishell_2/PSU_minishell2_2017/src/shell_loop/is_command_valid.c	/^static bool display_error(insturction_t *instruction)$/;"	function	line:11	file:	signature:(insturction_t *instruction)
+is_command_valid	/home/pflorent/Delivery/SHELL/Minishell_2/PSU_minishell2_2017/src/shell_loop/is_command_valid.c	/^bool is_command_valid(command_line_t *command)$/;"	function	line:19	signature:(command_line_t *command)
