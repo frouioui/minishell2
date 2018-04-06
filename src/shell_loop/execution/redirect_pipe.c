@@ -32,7 +32,7 @@ static void redirect_stdout(pipe_t *pipe)
 static void redirect_stdin(pipe_t *pipe)
 {
 	if (pipe->type_redirect == STDIN_SIMPLE)
-		pipe->fd = open(pipe->file_redirect, O_RDWR | O_CREAT |
+		pipe->fd = open(pipe->file_redirect, O_RDONLY,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH |
 			S_IWOTH);
 /*	if (pipe->type_redirect == STDIN_DOUBLE)
