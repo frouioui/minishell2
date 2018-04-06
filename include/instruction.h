@@ -70,5 +70,6 @@ unsigned int get_redirect(pipe_t **pipe, unsigned int number_of_pipe);
 unsigned int analyse_redirect(pipe_t *pipe);
 void check_env_variable(char **args, char **env);
 void fix_extra_spaces(char *str);
+void display_error_instruction(instruction_t *instruction);
 
 #endif /* end of include guard: INSTRUCTION_H */
