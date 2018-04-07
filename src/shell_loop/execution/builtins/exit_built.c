@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** PSU_minishell2_2017
 ** File description:
-** __DESCRIPTION__
+** Set the state to exit.
 */
 
 #include "shell.h"

@@ -19,5 +19,5 @@ int main(int argc, char **argv, char **env)
 		return (FAILURE);
 	if (shell_loop(shell) == FAILURE)
 		return (FAILURE);
-	return (shell->code);
+	return (destroy_shell(shell));
 }

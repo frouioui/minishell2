@@ -59,6 +59,13 @@ static int get_file_name(char *exec)
 	return (0);
 }
 
+static void *free_file(char *file, char *exec)
+{
+	free(file);
+	free(exec);
+	return (NULL);
+}
+
 char *get_execution_file_path(char *exec, shell_t *shell)
 {
 	char *path = my_strcpy(NULL, shell->backup->current_pwd);
@@ -68,17 +75,17 @@ char *get_execution_file_path(char *exec, shell_t *shell)
 
 	a = get_file_name(exec);
 	file == NULL ? exit_prog(84) : 0;
-	if (roll_back > 0 && a > -1)
-		roll_back_path(path, roll_back);
+	roll_back > 0 && a > -1 ? roll_back_path(path, roll_back) : 0;
 	for (int i = 0; a > -1 && path[i]; i++) {
 		file[a] = path[i];
 		a++;
 	}
+	free(path);
 	a == -42 ? a = 0 : 0;
 	for (int i = 0; exec[i] && exec[i] != ' '; a++) {
 		file[a] = exec[i];
 		file[a + 1] = '\0';
 		i++;
 	}
-	return (access(file, X_OK) == -1 ? NULL : file);
+	return (access(file, X_OK) == -1 ? free_file(file, exec) : file);
 }

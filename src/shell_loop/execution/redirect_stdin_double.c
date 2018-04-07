@@ -23,6 +23,7 @@ static void get_user_stdin_input(pipe_t *pipe, char *arg)
 		if (write(pipe->pipe[1], input, my_strlen(input)) == -1)
 			perror("write");
 		write(pipe->pipe[1], "\n", 1);
+		free(input);
 	}
 }
 

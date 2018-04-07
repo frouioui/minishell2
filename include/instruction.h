@@ -62,6 +62,8 @@ typedef struct command_line_s {
 	bool valid;
 } command_line_t;
 
+void free_command(command_line_t *command);
+void free_array_string(char **array);
 unsigned int get_number_instruction(char *user_input);
 command_line_t *get_command_line(char *user_input, char **env);
 unsigned int fill_up_instruction(instruction_t **insturction, char **env);

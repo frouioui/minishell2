@@ -20,9 +20,10 @@ unsigned int shell_loop(shell_t *shell)
 		if (shell->command_line == NULL)
 			return (FAILURE);
 		shell->state = execute_command(shell, shell->command_line);
-		// destroy command line
+		free_command(shell->command_line);
 		update_backup(shell);
 		display_prompt(shell);
+		free(user_input);
 	}
 	return (SUCCESS);
 }
