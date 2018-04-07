@@ -13,26 +13,20 @@
 
 static void dup_first(pipe_t *pipe, int *fd)
 {
-	if (pipe->redirect == false) {
-		if (dup2(fd[1], 1) == -1)
-			perror("dup");
-		close(fd[0]);
-		close(fd[1]);
-	} else {
+	if (dup2(fd[1], 1) == -1)
+		perror("dup");
+	if (pipe->redirect == true)
 		redirect_pipe(pipe);
-	}
+	close(fd[0]);
 }
 
 static void dup_last(pipe_t *pipe, int *fd)
 {
-	if (pipe->redirect == false) {
-		if (dup2(fd[0], 0) == -1)
-			perror("dup");
-		close(fd[0]);
-		close(fd[1]);
-	} else {
+	if (dup2(fd[0], 0) == -1)
+		perror("dup");
+	if (pipe->redirect == true)
 		redirect_pipe(pipe);
-	}
+	close(fd[1]);
 }
 
 static void dup_between(pipe_t *pipe, int *fd, int *fd2)

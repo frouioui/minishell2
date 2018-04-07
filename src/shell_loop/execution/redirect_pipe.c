@@ -17,11 +17,11 @@
 static void redirect_stdout(pipe_t *pipe)
 {
 	if (pipe->type_redirect == STDOUT_SIMPLE)
-		pipe->fd = open(pipe->file_redirect, O_CREAT | O_RDWR,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH |
-			S_IWOTH);
+		pipe->fd = open(pipe->file_redirect, O_CREAT | O_TRUNC |
+			O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP |
+			S_IROTH | S_IWOTH);
 	if (pipe->type_redirect == STDOUT_DOUBLE)
-		pipe->fd = open(pipe->file_redirect, O_RDWR | O_CREAT |
+		pipe->fd = open(pipe->file_redirect, O_WRONLY | O_CREAT |
 		O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH |
 		S_IWOTH);
 	pipe->fd == -1 ? exit(84) : 0;

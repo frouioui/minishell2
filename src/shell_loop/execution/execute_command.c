@@ -11,6 +11,8 @@
 
 static bool is_instruction_valid(instruction_t *instruction)
 {
+	if (instruction->valid == false)
+		return (false);
 	for (int i = 0; instruction->pipe[i]; i++) {
 		if (instruction->pipe[i]->valid == false)
 			return (false);
@@ -32,5 +34,5 @@ unsigned int execute_command(shell_t *shell, command_line_t *command)
 			display_error_instruction(command->instruction[nb]);
 		}
 	}
-	return (shell->state);
+	return (shell->code);
 }

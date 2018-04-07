@@ -75,6 +75,9 @@ SRCS_TEST	= ./tests/get_next_line_test.c \
 		./tests/cd_builtin_crash_test.c \
 		./tests/setenv_builtin_test.c \
 		./tests/is_builtin_test.c \
+		./tests/execute_command_test.c \
+		./tests/execute_command2_test.c \
+		./tests/execute_command3_test.c
 
 LIB	= ./lib/my_putchar.c \
 	./lib/get_next_line.c \
