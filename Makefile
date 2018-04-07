@@ -48,7 +48,8 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/execution/exit_prog.c \
 	./src/shell_loop/execution/simple_execution.c \
 	./src/shell_loop/execution/check_sig.c \
-	./src/shell_loop/execution/display_error_instruction.c
+	./src/shell_loop/execution/display_error_instruction.c \
+	./src/shell_loop/execution/redirect_stdin_double.c \
 
 SRC_MAIN	= ./src/main.c \
 
@@ -70,6 +71,8 @@ SRCS_TEST	= ./tests/get_next_line_test.c \
 		./tests/get_command_line_1_test.c \
 		./tests/cd_builtin_test.c \
 		./tests/cd_builtin_crash_test.c \
+		./tests/setenv_builtin_test.c \
+		./tests/is_builtin_test.c \
 
 LIB	= ./lib/my_putchar.c \
 	./lib/get_next_line.c \

@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** PSU_minishell2_2017
 ** File description:
-** __DESCRIPTION__
+** Return true if the argument is a builtin.
 */
 
 #include <stdbool.h>

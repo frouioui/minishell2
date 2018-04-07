@@ -31,16 +31,14 @@ static void redirect_stdout(pipe_t *pipe)
 
 static void redirect_stdin(pipe_t *pipe)
 {
-	if (pipe->type_redirect == STDIN_SIMPLE)
-		pipe->fd = open(pipe->file_redirect, O_RDONLY,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH |
-			S_IWOTH);
-/*	if (pipe->type_redirect == STDIN_DOUBLE)
-		pipe->fd = open(pipe->file_redirect, O_RDONLY | O_CREAT |
-		O_APPEND);
-*/	pipe->fd == -1 ? exit(84) : 0;
-	if (dup2(pipe->fd, 0) == -1)
-		perror("dup2");
+	if (pipe->type_redirect == STDIN_SIMPLE) {
+		pipe->fd = open(pipe->file_redirect, O_RDONLY);
+		pipe->fd == -1 ? exit(84) : 0;
+		if (dup2(pipe->fd, 0) == -1)
+			perror("dup2");
+	}
+	if (pipe->type_redirect == STDIN_DOUBLE)
+		redirect_stdin_double(pipe);
 }
 
 void redirect_pipe(pipe_t *pipe)
