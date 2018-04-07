@@ -13,13 +13,13 @@
 static void set_default_mode_backup(backup_t *backup)
 {
 	if (backup->path == NULL)
-		backup->path = PATH_ECHEC;
+		backup->path = my_strcpy(NULL, PATH_ECHEC);
 	if (backup->home == NULL)
-		backup->home = PATH_HOME;
+		backup->home = my_strcpy(NULL, PATH_HOME);
 	if (backup->user == NULL)
-		backup->user = USER;
+		backup->user = my_strcpy(NULL, USER);
 	if (backup->current_pwd == NULL)
-		backup->current_pwd = PWD;
+		backup->current_pwd = my_strcpy(NULL, PWD);
 }
 
 backup_t *initialisation_backup(char **env)
