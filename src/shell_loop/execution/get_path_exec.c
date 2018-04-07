@@ -65,5 +65,6 @@ char *get_path_exec(pipe_t *pipe, shell_t *shell)
 	if (filename == NULL) {
 		display_error_execution(pipe->args[0]);
 	}
+	free(path);
 	return (filename);
 }

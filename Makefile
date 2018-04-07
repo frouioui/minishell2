@@ -8,6 +8,7 @@ RM	= rm -f *.g* $(TEST_NAME) -R report rapport.info ./include/*.h.*
 
 
 SRCS	= ./src/check_args.c \
+	./src/destroy_shell.c \
 	./src/initialisation_shell/copy_environement.c \
 	./src/initialisation_shell/initialisation_shell.c \
 	./src/initialisation_shell/set_env_echec_mode.c \
@@ -15,6 +16,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/parsing/get_command_line.c \
 	./src/shell_loop/parsing/get_number_instruction.c \
 	./src/shell_loop/shell_loop.c \
+	./src/shell_loop/free_command.c \
 	./src/shell_loop/update_backup.c \
 	./src/shell_loop/free_array_string.c \
 	./src/shell_loop/parsing/get_pipe_number.c \
