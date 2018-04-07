@@ -37,13 +37,14 @@ typedef enum error_syntax_s {
 typedef struct pipe_s {
 	char *full_instruction;
 	char **args;
+	char *path_exec;
+	char *file_redirect;
+	int fd;
+	int pipe[2];
 	bool valid;
 	bool redirect;
 	error_syntax_t error;
 	redirect_t type_redirect;
-	int fd;
-	char *file_redirect;
-	char *path_exec;
 } pipe_t;
 
 typedef struct instruction_s {

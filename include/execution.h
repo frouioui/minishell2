@@ -40,6 +40,7 @@ void simple_execution(shell_t *shell, instruction_t *instruction);
 void check_sig(int status);
 void bad_archi(shell_t *shell, char *arg);
 char *get_redirect_filename(pipe_t *pipe);
+void redirect_stdin_double(pipe_t *pipe_act);
 
 /* --- builtins functions --- */
 int exec_builtins(shell_t *shell, pipe_t *pipe);

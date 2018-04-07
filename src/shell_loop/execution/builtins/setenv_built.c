@@ -71,15 +71,17 @@ static char **add_env_variable(char **env, char **args, int pos)
 	return (env);
 }
 
-static void check_setenv_variable(shell_t *shell, char *arg)
+static int check_setenv_variable(shell_t *shell, char *arg)
 {
 	for (int i = 0; arg[i]; i++) {
 		if (ALPHANUM(arg[i]) == 0) {
 			my_putstr("setenv: Variable name must contain "\
 			"alphanumeric characters.\n");
 			shell->code = 1;
+			return (-1);
 		}
 	}
+	return (0);
 }
 
 int setenv_built(shell_t *shell, pipe_t *pipe)
@@ -88,14 +90,14 @@ int setenv_built(shell_t *shell, pipe_t *pipe)
 
 	if (pipe->args[1] == NULL)
 		return (env_built(shell, pipe));
-	check_setenv_variable(shell, pipe->args[1]);
+	if (check_setenv_variable(shell, pipe->args[1]) == -1)
+		return (0);
 	pos = get_line_env(shell->env, pipe->args[1]);
-	if (pipe->args[2] == NULL) {
+	if (pipe->args[2] == NULL)
 		shell->env = add_env_variable(shell->env, pipe->args, pos);
-	} else if (my_get_env(shell->env, pipe->args[1]) == NULL) {
+	else if (my_get_env(shell->env, pipe->args[1]) == NULL)
 		shell->env = add_env_variable(shell->env, pipe->args, pos);
-	} else {
+	else
 		update_env_variable(shell->env, pos, pipe->args[2]);
-	}
 	return (0);
 }
