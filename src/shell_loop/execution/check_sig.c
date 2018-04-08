@@ -12,7 +12,7 @@
 #include <string.h>
 #include "mylib.h"
 
-char *add_core_dump(char *base)
+static char *display_core_dump(char *base)
 {
 	int i = my_strlen(base);
 	char *str = " (core dumped)\n";
@@ -26,29 +26,33 @@ char *add_core_dump(char *base)
 		i++;
 	}
 	new[i] = '\0';
-	return (new);
+	my_putstr(new);
 }
 
-void check_sig(int stat)
+static void display_sign(char *str)
+{
+	my_putstr(str);
+	my_putchar('\n');
+}
+
+void check_sig(shell_t *shell, int stat)
 {
 	char *str = NULL;
 	int nb = (stat >= 128 ? stat - 128 : stat);
 
-	if (nb == SIGFPE) {
+	if (WIFSIGNALED(stat) && nb == SIGFPE) {
 		if (WCOREDUMP(stat))
 			my_putstr("Floating exception (core dumped)\n");
 		else
 			my_putstr("Floating exception\n");
+		shell->code = nb + 128;
 		return;
 	}
 	if (WIFSIGNALED(stat)) {
 		str = my_strcpy(NULL, (char *)sys_siglist[nb]);
-		if (WCOREDUMP(stat))
-			str = add_core_dump(str);
-		my_putstr(str);
-	} else if (WIFSTOPPED(stat)) {
+		WCOREDUMP(stat) ? display_core_dump(str) : display_sign(str);
+		shell->code = nb + 128;
+	} else if (WIFSTOPPED(stat))
 		my_putstr("Stopped\n");
-	}
-	if (str != NULL)
-		free(str);
+	str != NULL ? free(str) : 0;
 }

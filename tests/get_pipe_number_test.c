@@ -11,7 +11,7 @@
 #include "instruction.h"
 #include "mylib.h"
 
-Test(get_pipe_number_1, 1_pipe, .timeout = 0.1)
+Test(get_pipe_number_1, 1_pipe, .timeout = 0.2)
 {
 	instruction_t **inst = malloc(sizeof(instruction_t *) * 4);
 	char str[4][20] = {"ls", "grep \"tty\"", "/bin/cat main.cpp",
@@ -26,7 +26,7 @@ Test(get_pipe_number_1, 1_pipe, .timeout = 0.1)
 	}
 }
 
-Test(get_pipe_number_2, 2_pipe, .timeout = 0.1)
+Test(get_pipe_number_2, 2_pipe, .timeout = 0.2)
 {
 	instruction_t **inst = malloc(sizeof(instruction_t *) * 3);
 	char str[3][50] = {"ls | grep \"toto\"", "ls -l|salut",
@@ -41,7 +41,7 @@ Test(get_pipe_number_2, 2_pipe, .timeout = 0.1)
 	}
 }
 
-Test(get_pipe_number_3, 3_pipe, .timeout = 0.1)
+Test(get_pipe_number_3, 3_pipe, .timeout = 0.2)
 {
 	instruction_t **inst = malloc(sizeof(instruction_t *) * 2);
 	char str[2][60] = {"ls | cat toto | grep tt",
@@ -56,7 +56,7 @@ Test(get_pipe_number_3, 3_pipe, .timeout = 0.1)
 	}
 }
 
-Test(get_pipe_number_4, 4_pipe, .timeout = 0.1)
+Test(get_pipe_number_4, 4_pipe, .timeout = 0.2)
 {
 	instruction_t **inst = malloc(sizeof(instruction_t *) * 2);
 	char str[2][60] = {"ls | cat toto | grep tt | dif toto toto slnine",
@@ -71,7 +71,7 @@ Test(get_pipe_number_4, 4_pipe, .timeout = 0.1)
 	}
 }
 
-Test(get_pipe_number_5, wrong_pipe, .timeout = 0.1)
+Test(get_pipe_number_5, wrong_pipe, .timeout = 0.2)
 {
 	instruction_t **inst = malloc(sizeof(instruction_t *) * 2);
 	char str[2][60] = {"ls |  | cat toto | grep tt | ",

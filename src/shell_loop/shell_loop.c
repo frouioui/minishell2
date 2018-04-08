@@ -15,7 +15,8 @@ unsigned int shell_loop(shell_t *shell)
 	char *user_input = NULL;
 
 	display_prompt(shell);
-	while (shell->state == OK && (user_input = get_next_line(0)) != NULL) {
+	while (shell->state == OK && (user_input = get_next_line(0)) != NULL &&
+		my_strlen(user_input) > 0) {
 		shell->command_line = get_command_line(user_input, shell->env);
 		if (shell->command_line == NULL)
 			return (FAILURE);
