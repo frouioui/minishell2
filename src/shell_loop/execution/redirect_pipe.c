@@ -29,6 +29,21 @@ static void redirect_stdout(pipe_t *pipe)
 		perror("dup2");
 }
 
+static void redirect_stderr(pipe_t *pipe)
+{
+	if (pipe->type_redirect == STDERR_SIMPLE)
+		pipe->fd = open(pipe->file_redirect, O_CREAT | O_TRUNC |
+			O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP |
+			S_IROTH | S_IWOTH);
+	if (pipe->type_redirect == STDERR_DOUBLE)
+		pipe->fd = open(pipe->file_redirect, O_WRONLY | O_CREAT |
+		O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH |
+		S_IWOTH);
+	pipe->fd == -1 ? exit(84) : 0;
+	if (dup2(pipe->fd, 2) == -1)
+		perror("dup2");
+}
+
 static void redirect_stdin(pipe_t *pipe)
 {
 	if (pipe->type_redirect == STDIN_SIMPLE) {
@@ -54,5 +69,9 @@ void redirect_pipe(pipe_t *pipe)
 	} else if (pipe->type_redirect == STDIN_SIMPLE ||
 	pipe->type_redirect == STDIN_DOUBLE) {
 		redirect_stdin(pipe);
+	}
+	if (pipe->type_redirect == STDERR_SIMPLE || pipe->type_redirect ==
+		STDERR_DOUBLE) {
+		redirect_stderr(pipe);
 	}
 }

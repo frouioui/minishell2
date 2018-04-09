@@ -25,6 +25,8 @@ typedef enum type_redirect_s {
 	STDOUT_DOUBLE,
 	STDIN_SIMPLE,
 	STDIN_DOUBLE,
+	STDERR_SIMPLE,
+	STDERR_DOUBLE
 } redirect_t;
 
 typedef enum error_syntax_s {
@@ -74,5 +76,6 @@ unsigned int analyse_redirect(pipe_t *pipe);
 void check_env_variable(char **args, char **env);
 void fix_extra_spaces(char *str);
 void display_error_instruction(instruction_t *instruction);
+bool is_empty_input(char *user_input);
 
 #endif /* end of include guard: INSTRUCTION_H */

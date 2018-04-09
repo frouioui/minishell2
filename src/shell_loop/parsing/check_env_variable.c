@@ -15,10 +15,8 @@ static char *set_args_variable(char *arg, char **env)
 
 	if (variable != NULL) {
 		free(arg);
-		arg = malloc(sizeof(char) * (my_strlen(variable) + 1));
-		if (arg == NULL)
-			exit(84);
-		arg = my_strcpy(arg, variable);
+		arg = my_strcpy(NULL, variable);
+		free(variable);
 		return (arg);
 	} else {
 		return (arg);
