@@ -53,7 +53,8 @@ static char **add_env_variable(char **env, char **args, int pos)
 	int j = 0;
 	int i = 0;
 
-	env[pos] = malloc(sizeof(char) * (my_strlen(args[1]) + my_strlen(args[2]) + 10));
+	env[pos] = malloc(sizeof(char) * (my_strlen(args[1]) +
+			my_strlen(args[2]) + 10));
 	while (args[1][i]) {
 		env[pos][j] = args[1][i];
 		i++;

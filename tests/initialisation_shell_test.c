@@ -10,7 +10,7 @@
 #include "echec.h"
 #include "mylib.h"
 
-Test(initialisation_shell_1, check_value, .timeout = 1)
+Test(initialisation_shell_1, check_value, .timeout = 2)
 {
 	shell_t *shell = NULL;
 	char **env = malloc(sizeof(char *) * (5));
@@ -34,7 +34,7 @@ Test(initialisation_shell_1, check_value, .timeout = 1)
 	cr_assert_str_eq(env[3], "PWD=/home/marvin");
 }
 
-Test(initialisation_shell_2, check_echec_mode, .timeout = 0.5)
+Test(initialisation_shell_2, check_echec_mode, .timeout = 1)
 {
 	shell_t *shell = NULL;
 	char echec[4][90] = ENV_ECHEC;

@@ -10,7 +10,7 @@
 #include "instruction.h"
 #include "mylib.h"
 
-Test(get_pipe_1, 1_pipe_value, .timeout = 0.1)
+Test(get_pipe_1, 1_pipe_value, .timeout = 0.2)
 {
 	instruction_t *inst = malloc(sizeof(instruction_t));
 	pipe_t **pipe = NULL;
@@ -28,7 +28,7 @@ Test(get_pipe_1, 1_pipe_value, .timeout = 0.1)
 	cr_assert_str_eq(pipe[0]->args[1], "-l");
 }
 
-Test(get_pipe_1, 2_pipes_value, .timeout = 0.1)
+Test(get_pipe_1, 2_pipes_value, .timeout = 0.2)
 {
 	instruction_t *inst = malloc(sizeof(instruction_t));
 	pipe_t **pipe = NULL;

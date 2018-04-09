@@ -12,7 +12,7 @@
 #include "instruction.h"
 #include "mylib.h"
 
-Test(execute_command_1, simple_command, .timeout = 0.05)
+Test(execute_command_1, simple_command, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
@@ -31,7 +31,7 @@ Test(execute_command_1, simple_command, .timeout = 0.05)
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
 }
 
-Test(execute_command_2, invalid_command, .timeout = 0.05)
+Test(execute_command_2, invalid_command, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
@@ -50,7 +50,7 @@ Test(execute_command_2, invalid_command, .timeout = 0.05)
 	cr_assert_eq(execute_command(shell, shell->command_line), 1, "was %d");
 }
 
-Test(execute_command_3, simple_command, .timeout = 0.05)
+Test(execute_command_3, simple_command, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));

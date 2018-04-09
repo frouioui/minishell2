@@ -30,8 +30,8 @@ static void execute_child(shell_t *shell, pipe_t *pipe)
 		exit(shell->code);
 	} else {
 		!wait(&status) ? perror(pipe->args[0]) : 0;
-		check_sig(status);
 		shell->code = status >= 256 ? status / 256 : status;
+		check_sig(shell, status);
 	}
 }
 

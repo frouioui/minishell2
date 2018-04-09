@@ -12,7 +12,7 @@
 #include "instruction.h"
 #include "mylib.h"
 
-Test(execute_command_6, simple_redirection, .timeout = 0.05)
+Test(execute_command_6, simple_redirection, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
@@ -34,7 +34,7 @@ Test(execute_command_6, simple_redirection, .timeout = 0.05)
 	cr_assert_file_contents_eq_str(fp, "toto\n");
 }
 
-Test(execute_command_7, simple_and_double_redirection, .timeout = 0.05)
+Test(execute_command_7, simple_and_double_redirection, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
@@ -58,7 +58,7 @@ Test(execute_command_7, simple_and_double_redirection, .timeout = 0.05)
 	cr_assert_file_contents_eq_str(fp, "toto\nahah\n");
 }
 
-Test(execute_command_8, simple_redirection_input, .timeout = 0.05)
+Test(execute_command_8, simple_redirection_input, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
@@ -79,7 +79,7 @@ Test(execute_command_8, simple_redirection_input, .timeout = 0.05)
 	cr_assert_eq(execute_command(shell, shell->command_line), 1);
 }
 
-Test(execute_command_9, simple_redirection_input, .timeout = 0.05)
+Test(execute_command_9, simple_redirection_input, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));

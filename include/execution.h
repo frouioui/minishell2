@@ -37,7 +37,7 @@ char *get_path_exec(pipe_t *pipe, shell_t *shell);
 char *get_execution_file_path(char *exec, shell_t *shell);
 void exit_prog(int code);
 void simple_execution(shell_t *shell, instruction_t *instruction);
-void check_sig(int status);
+void check_sig(shell_t *shell, int status);
 void bad_archi(shell_t *shell, char *arg);
 char *get_redirect_filename(pipe_t *pipe);
 void redirect_stdin_double(pipe_t *pipe_act);

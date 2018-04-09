@@ -12,7 +12,7 @@
 #include "instruction.h"
 #include "mylib.h"
 
-Test(execute_command_10, simple_pipe, .timeout = 0.05)
+Test(execute_command_10, simple_pipe, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
@@ -32,7 +32,7 @@ Test(execute_command_10, simple_pipe, .timeout = 0.05)
 	cr_assert_stdout_eq_str("b\n");
 }
 
-Test(execute_command_11, invalid_command_simple_pipe, .timeout = 0.05)
+Test(execute_command_11, invalid_command_simple_pipe, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
@@ -52,7 +52,7 @@ Test(execute_command_11, invalid_command_simple_pipe, .timeout = 0.05)
 	cr_assert_stdout_eq_str("exittt: Command not found.\n");
 }
 
-Test(execute_command_12, simple_pipe, .timeout = 0.05)
+Test(execute_command_12, simple_pipe, .timeout = 0.2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));

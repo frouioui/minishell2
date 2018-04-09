@@ -13,7 +13,7 @@
 #include "mylib.h"
 
 // Should not SegFault ! No spesific result is expected here
-Test(cd_built_6, check_new_pwd, .timeout = 1)
+Test(cd_built_6, check_new_pwd, .timeout = 2)
 {
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
