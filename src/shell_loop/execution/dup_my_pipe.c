@@ -42,8 +42,6 @@ static void dup_between(pipe_t *pipe, int *fd, int *fd2)
 		if (dup2(fd2[0], 0) == -1)
 			perror("dup");
 	close(fd[0]);
-	close(fd[1]);
-	close(fd2[0]);
 	close(fd2[1]);
 }
 

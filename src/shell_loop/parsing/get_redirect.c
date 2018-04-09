@@ -33,6 +33,18 @@ static void check_after_redirect(pipe_t *pipe, char *inst, int *i)
 	}
 }
 
+void check_stderr_redirect(pipe_t *pipe, char *inst, int *i)
+{
+	if (inst[*i + 1] == '>' && inst[*i + 2] == '2' &&
+		SPACE_TAB(inst[*i + 3])) {
+		pipe->type_redirect = STDERR_DOUBLE;
+		*i = *i + 3;
+	} else if (inst[*i + 1] == '2' && SPACE_TAB(inst[*i + 2])) {
+		pipe->type_redirect = STDERR_SIMPLE;
+		*i = *i + 2;
+	}
+}
+
 static void scan_redirect(pipe_t *pipe, char *inst, int *i)
 {
 	if (inst[*i] == '>') {
@@ -43,6 +55,7 @@ static void scan_redirect(pipe_t *pipe, char *inst, int *i)
 			pipe->type_redirect = STDOUT_SIMPLE;
 			*i = *i + 1;
 		}
+		check_stderr_redirect(pipe, inst, i);
 	} else if (inst[*i] == '<') {
 		if (inst[*i + 1] == '<' && SPACE_TAB(inst[*i + 2])) {
 			pipe->type_redirect = STDIN_DOUBLE;

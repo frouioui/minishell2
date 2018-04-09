@@ -15,22 +15,22 @@ static char **update_env_variable(char **env, int pos, char *str)
 {
 	int i = 0;
 	int j = 0;
-	char *buffer = env[pos];
+	char *buffer = my_getenv_root(env[pos]);
 
-	if (env[pos] == NULL)
-		exit(84);
-	while (buffer[i] != '=' && buffer[i]) {
-		env[pos][j] = buffer[i];
+	free(env[pos]);
+	env[pos] = malloc(sizeof(char) * (my_strlen(buffer) +
+					my_strlen(str) + 1));
+	while (buffer[i]) {
+		env[pos][i] = buffer[i];
 		i++;
-		j++;
 	}
-	env[pos][j] = buffer[i];
-	j++;
-	for (i = 0; str[i]; i++) {
-		env[pos][j] = str[i];
+	while (str[j]) {
+		env[pos][i] = str[j];
 		j++;
+		i++;
 	}
-	env[pos][j] = '\0';
+	env[pos][i] = '\0';
+	free(buffer);
 	return (env);
 }
 

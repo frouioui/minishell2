@@ -15,7 +15,7 @@
 static char *get_test_path(char *path, char *file, int *i)
 {
 	char *test = malloc(sizeof(char) *
-		(my_strlen(path) + my_strlen(file) + 1));
+		(my_strlen(path) + my_strlen(file) + 2));
 	int count = 0;
 	int a = *i;
 

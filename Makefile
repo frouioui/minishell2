@@ -77,7 +77,8 @@ SRCS_TEST	= ./tests/get_next_line_test.c \
 		./tests/is_builtin_test.c \
 		./tests/execute_command_test.c \
 		./tests/execute_command2_test.c \
-		./tests/execute_command3_test.c
+		./tests/execute_command3_test.c \
+		./tests/is_empty_line_test.c
 
 LIB	= ./lib/my_putchar.c \
 	./lib/get_next_line.c \
@@ -88,7 +89,8 @@ LIB	= ./lib/my_putchar.c \
 	./lib/my_strcpy.c \
 	./lib/my_get_env.c \
 	./lib/my_str_to_words_array.c \
-	./lib/my_get_line_env.c
+	./lib/my_get_line_env.c \
+	./lib/my_getenv_root.c \
 
 OBJS	= $(LIB:.c=.o) \
 	$(SRCS:.c=.o) \

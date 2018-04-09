@@ -10,9 +10,18 @@
 #include "mylib.h"
 #include "execution.h"
 
-unsigned int redirect_loop(shell_t *shell, char *user_input)
+bool is_empty_input(char *user_input)
 {
-	if (my_strlen(user_input) > 0) {
+	for (int i = 0; user_input[i]; i++) {
+		if (SPACE_TAB(user_input[i]) == 0)
+			return (true);
+	}
+	return (false);
+}
+
+static unsigned int redirect_loop(shell_t *shell, char *user_input)
+{
+	if (is_empty_input(user_input) == true) {
 		shell->command_line = get_command_line(user_input, shell->env);
 		if (shell->command_line == NULL)
 			return (FAILURE);

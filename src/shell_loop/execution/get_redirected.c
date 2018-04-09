@@ -14,7 +14,7 @@
 #include "instruction.h"
 #include "mylib.h"
 
-static char *cut_filename(char *instruction)
+static char *cut_filename(char *instruction, redirect_t redirect)
 {
 	char *filename = malloc(sizeof(char) * my_strlen(instruction));
 	int i = 0;
@@ -26,6 +26,7 @@ static char *cut_filename(char *instruction)
 		i++;
 	while (REDIRECT_CHAR(instruction[i]) && instruction[i])
 		i++;
+	redirect == STDERR_DOUBLE || redirect == STDERR_SIMPLE ? i++ : 0;
 	while (SPACE_TAB(instruction[i]) && instruction[i])
 		i++;
 	while (instruction[i] && SPACE_TAB(instruction[i]) == 0) {
@@ -48,12 +49,12 @@ static void clear_redirected_pipe(char *instruction)
 
 char *get_redirect_filename(pipe_t *pipe)
 {
-	char *filename = cut_filename(pipe->full_instruction);
+	char *file = cut_filename(pipe->full_instruction, pipe->type_redirect);
 
-	if (filename == NULL)
-		return (filename);
+	if (file == NULL)
+		return (file);
 	free_array_string(pipe->args);
 	clear_redirected_pipe(pipe->full_instruction);
 	pipe->args = cut_line(pipe->full_instruction);
-	return (filename);
+	return (file);
 }

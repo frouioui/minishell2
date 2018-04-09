@@ -21,5 +21,6 @@ char *my_get_env(char **env, char *target);
 char **cut_line(char *line);
 unsigned int get_line_env(char **env, char *target);
 unsigned int get_line_env_zero(char **env, char *target);
+char *my_getenv_root(char *str);
 
 #endif /* end of include guard: LIBMY_H */
