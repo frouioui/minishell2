@@ -39,7 +39,7 @@ void simple_execution(shell_t *shell, instruction_t *instruction)
 {
 	if (is_builtins(instruction->pipe[0]->args[0]) == true) {
 		if (exec_builtins(shell, instruction->pipe[0]) == -1)
-			exit(1);
+			shell->code = 1;
 	} else if ((instruction->pipe[0]->path_exec =
 		get_path_exec(instruction->pipe[0], shell)) != NULL) {
 		execute_child(shell, instruction->pipe[0]);

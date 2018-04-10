@@ -77,5 +77,6 @@ void check_env_variable(char **args, char **env);
 void fix_extra_spaces(char *str);
 void display_error_instruction(instruction_t *instruction);
 bool is_empty_input(char *user_input);
+char *apply_transformation(char *user_input);
 
 #endif /* end of include guard: INSTRUCTION_H */
