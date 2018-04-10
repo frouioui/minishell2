@@ -29,7 +29,7 @@ static unsigned int get_instruction(command_line_t *command, char *input)
 	unsigned int j = 0;
 	int i = 0;
 
-	while (input[i] && j < command->number_instruction) {
+	while (i < my_strlen(input) && j < command->number_instruction) {
 		command->instruction[j] = new_instruction(input);
 		if (command->instruction[j] == NULL)
 			return (FAILURE);

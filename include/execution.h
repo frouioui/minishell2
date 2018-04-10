@@ -58,5 +58,6 @@ char *cd_special_cases(char *folder, char *env, int *changed);
 static char *get_name_variable(char *env, char *name, int *i);
 void save_old_pwd(char **env);
 void put_new_old_pwd(shell_t *shell, char *buffer);
+void restore_redirect(pipe_t *pipe);
 
 #endif /* end of include guard: EXECUTION_H */

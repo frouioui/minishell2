@@ -13,9 +13,11 @@ SRCS	= ./src/check_args.c \
 	./src/initialisation_shell/initialisation_shell.c \
 	./src/initialisation_shell/set_env_echec_mode.c \
 	./src/initialisation_shell/initialisation_backup.c \
+	./src/shell_loop/transformation/apply_transformation.c \
 	./src/shell_loop/parsing/get_command_line.c \
 	./src/shell_loop/parsing/get_number_instruction.c \
 	./src/shell_loop/shell_loop.c \
+	./src/shell_loop/write_command_history.c \
 	./src/shell_loop/free_command.c \
 	./src/shell_loop/update_backup.c \
 	./src/shell_loop/free_array_string.c \
@@ -91,6 +93,7 @@ LIB	= ./lib/my_putchar.c \
 	./lib/my_str_to_words_array.c \
 	./lib/my_get_line_env.c \
 	./lib/my_getenv_root.c \
+	./lib/my_atoi.c \
 
 OBJS	= $(LIB:.c=.o) \
 	$(SRCS:.c=.o) \

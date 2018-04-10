@@ -10,6 +10,8 @@
 
 #include "instruction.h"
 
+#define PATH_HISTORY_FILE "./.history"
+
 #define SUCCESS 0
 #define SKIP 21
 #define FAILURE 84
@@ -46,5 +48,6 @@ void display_prompt(shell_t *shell);
 void free_array_string(char **array);
 void update_backup(shell_t *shell);
 int destroy_shell(shell_t *shell);
+void write_command_history(command_line_t *command);
 
 #endif /* end of include guard: SHELL_H */

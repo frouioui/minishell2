@@ -1,0 +1,5 @@
+Personalisation du prompt.
+Gerer les redirection dans les pipes.
+Gerer les variables d'environement (ls $HOME ...).
+Sauvegarde des commandes dans un historique.
+Utilisation de l'historique grace à un builtin perso ("hst [nb]").
