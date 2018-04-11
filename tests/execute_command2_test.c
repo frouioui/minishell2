@@ -28,7 +28,8 @@ Test(execute_command_6, simple_redirection, .timeout = 0.2)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line("echo toto > i", shell->env);
+	shell->command_line = get_command_line(false, "echo toto > i",
+		shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
 	fp = fopen ("i","rw");
 	cr_assert_file_contents_eq_str(fp, "toto\n");
@@ -50,9 +51,11 @@ Test(execute_command_7, simple_and_double_redirection, .timeout = 0.2)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line("echo toto > a", shell->env);
+	shell->command_line = get_command_line(false, "echo toto > a",
+		shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
-	shell->command_line = get_command_line("echo ahah >> a", shell->env);
+	shell->command_line = get_command_line(false, "echo ahah >> a",
+		shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
 	fp = fopen ("a","rw");
 	cr_assert_file_contents_eq_str(fp, "toto\nahah\n");
@@ -73,9 +76,11 @@ Test(execute_command_8, simple_redirection_input, .timeout = 0.2)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line("echo toto > y", shell->env);
+	shell->command_line = get_command_line(false, "echo toto > y",
+		shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
-	shell->command_line = get_command_line("grep test < y", shell->env);
+	shell->command_line = get_command_line(false, "grep test < y",
+		shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 1);
 }
 
@@ -94,8 +99,10 @@ Test(execute_command_9, simple_redirection_input, .timeout = 0.2)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line("echo toto > u", shell->env);
+	shell->command_line = get_command_line(false, "echo toto > u",
+		shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
-	shell->command_line = get_command_line("grep toto < u", shell->env);
+	shell->command_line = get_command_line(false, "grep toto < u",
+		shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
 }

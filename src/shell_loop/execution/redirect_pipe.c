@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "execution.h"
 #include "instruction.h"
 
@@ -56,7 +57,7 @@ static void redirect_stdin(pipe_t *pipe)
 		redirect_stdin_double(pipe);
 }
 
-void redirect_pipe(pipe_t *pipe)
+void redirect_pipe(bool bonus, pipe_t *pipe)
 {
 	if (pipe->redirect == false)
 		return;
@@ -70,8 +71,8 @@ void redirect_pipe(pipe_t *pipe)
 	pipe->type_redirect == STDIN_DOUBLE) {
 		redirect_stdin(pipe);
 	}
-	if (pipe->type_redirect == STDERR_SIMPLE || pipe->type_redirect ==
-		STDERR_DOUBLE) {
+	if (bonus == true && pipe->type_redirect == STDERR_SIMPLE ||
+	pipe->type_redirect == STDERR_DOUBLE) {
 		redirect_stderr(pipe);
 	}
 }

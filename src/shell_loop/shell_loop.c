@@ -19,11 +19,12 @@ bool is_empty_input(char *user_input)
 	return (false);
 }
 
-static unsigned int redirect_loop(shell_t *shell, char *user_input)
+unsigned int redirect_loop(shell_t *shell, char *user_input)
 {
 	if (is_empty_input(user_input) == true) {
 		user_input = apply_transformation(shell->bonus, user_input);
-		shell->command_line = get_command_line(user_input, shell->env);
+		shell->command_line = get_command_line(shell->bonus,
+			user_input, shell->env);
 		if (shell->command_line == NULL)
 			return (FAILURE);
 		shell->code = execute_command(shell, shell->command_line);

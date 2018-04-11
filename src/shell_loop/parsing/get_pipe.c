@@ -53,7 +53,7 @@ static unsigned int get_full_pipe(pipe_t **pipe, instruction_t *inst)
 	return (SUCCESS);
 }
 
-pipe_t **get_pipe(instruction_t *instruction, char **env)
+pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env)
 {
 	pipe_t **pipe = malloc(sizeof(pipe_t *) *
 	(instruction->number_of_pipe + 1));
@@ -71,7 +71,7 @@ pipe_t **get_pipe(instruction_t *instruction, char **env)
 		return (NULL);
 	if (get_args_pipe(pipe, env) == FAILURE)
 		return (NULL);
-	if (get_redirect(pipe, instruction->number_of_pipe) == FAILURE)
+	if (get_redirect(bonus, pipe, instruction->number_of_pipe) == FAILURE)
 		return (NULL);
 	return (pipe);
 }

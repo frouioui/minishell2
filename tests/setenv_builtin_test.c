@@ -26,7 +26,8 @@ Test(setenv_builtin_1, simple_setenv)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
-	shell->command_line = get_command_line("setenv TOTO", shell->env);
+	shell->command_line = get_command_line(false, "setenv TOTO",
+		shell->env);
 	setenv_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->env[4], "TOTO=");
 	cr_assert_null(shell->env[5]);
@@ -46,7 +47,8 @@ Test(setenv_builtin_2, simple_setenv_looping)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
-	shell->command_line = get_command_line("setenv TOTO", shell->env);
+	shell->command_line = get_command_line(false, "setenv TOTO",
+		shell->env);
 	for (int i = 0; i < 10; i++) {
 		setenv_built(shell, shell->command_line->instruction[0]->
 			pipe[0]);
@@ -69,7 +71,8 @@ Test(setenv_builtin_3, simple_setenv_with_value)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
-	shell->command_line = get_command_line("setenv TOTO 123", shell->env);
+	shell->command_line = get_command_line(false, "setenv TOTO 123",
+		shell->env);
 	setenv_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->env[4], "TOTO=123");
 	cr_assert_null(shell->env[5]);
@@ -89,13 +92,13 @@ Test(setenv_builtin_4, simple_setenv_update_of_value)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
-	shell->command_line = get_command_line("setenv TOTO 123", shell->env);
+	shell->command_line = get_command_line(true, "setenv A 1", shell->env);
 	setenv_built(shell, shell->command_line->instruction[0]->pipe[0]);
-	cr_assert_str_eq(shell->env[4], "TOTO=123");
+	cr_assert_str_eq(shell->env[4], "A=1");
 	cr_assert_null(shell->env[5]);
-	shell->command_line = get_command_line("setenv TOTO ABCD", shell->env);
+	shell->command_line = get_command_line(true, "setenv A 2", shell->env);
 	setenv_built(shell, shell->command_line->instruction[0]->pipe[0]);
-	cr_assert_str_eq(shell->env[4], "TOTO=ABCD");
+	cr_assert_str_eq(shell->env[4], "A=2");
 	cr_assert_null(shell->env[5]);
 }
 
@@ -113,7 +116,8 @@ Test(setenv_builtin_5, wrong_command_setenv)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
-	shell->command_line = get_command_line("setenv TO=71é", shell->env);
+	shell->command_line = get_command_line(true, "setenv O=1é",
+		shell->env);
 	setenv_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_eq(shell->code, 1);
 	cr_assert_null(shell->env[4]);

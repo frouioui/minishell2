@@ -40,6 +40,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/execution/builtins/put_new_old_pwd.c \
 	./src/shell_loop/execution/builtins/error_wrong_folder.c \
 	./src/shell_loop/execution/builtins/save_old_pwd.c \
+	./src/shell_loop/execution/builtins/realloc_env.c \
 	./src/shell_loop/execution/get_redirected.c \
 	./src/shell_loop/execution/multiple_execution.c \
 	./src/shell_loop/execution/execute_command.c \
@@ -81,7 +82,11 @@ SRCS_TEST	= ./tests/get_next_line_test.c \
 		./tests/execute_command_test.c \
 		./tests/execute_command2_test.c \
 		./tests/execute_command3_test.c \
-		./tests/is_empty_line_test.c
+		./tests/is_empty_line_test.c \
+		./tests/setenv_crash_test.c \
+		./tests/write_history_test.c \
+		./tests/transforme_cmd_test.c \
+		./tests/destroy_shell_test.c
 
 LIB	= ./lib/my_putchar.c \
 	./lib/get_next_line.c \
@@ -101,7 +106,7 @@ OBJS	= $(LIB:.c=.o) \
 	$(SRC_MAIN:.c=.o)
 
 CFLAGS = -I ./include/
-CFLAGS += -W -Wextra -g3
+CFLAGS += -W -Wextra
 
 TEST_FLAGS = -I ./include/ -lcriterion --coverage
 

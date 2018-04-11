@@ -64,19 +64,19 @@ typedef struct command_line_s {
 	bool valid;
 } command_line_t;
 
-void free_command(command_line_t *command);
-void free_array_string(char **array);
-unsigned int get_number_instruction(char *user_input);
-command_line_t *get_command_line(char *user_input, char **env);
-unsigned int fill_up_instruction(instruction_t **insturction, char **env);
-unsigned int get_pipe_number(instruction_t *instruction);
-pipe_t **get_pipe(instruction_t *instruction, char **env);
-unsigned int get_redirect(pipe_t **pipe, unsigned int number_of_pipe);
-unsigned int analyse_redirect(pipe_t *pipe);
-void check_env_variable(char **args, char **env);
-void fix_extra_spaces(char *str);
-void display_error_instruction(instruction_t *instruction);
-bool is_empty_input(char *user_input);
-char *apply_transformation(bool bonus, char *user_input);
+void free_command(command_line_t *);
+void free_array_string(char **);
+unsigned int get_number_instruction(char *);
+command_line_t *get_command_line(bool, char *, char **);
+unsigned int fill_up_instruction(bool, instruction_t **, char **);
+unsigned int get_pipe_number(instruction_t *);
+pipe_t **get_pipe(bool, instruction_t *, char **);
+unsigned int get_redirect(bool , pipe_t **, unsigned int);
+unsigned int analyse_redirect(bool , pipe_t *);
+void check_env_variable(char **, char **);
+void fix_extra_spaces(char *);
+void display_error_instruction(instruction_t *);
+bool is_empty_input(char *);
+char *apply_transformation(bool, char *);
 
 #endif /* end of include guard: INSTRUCTION_H */

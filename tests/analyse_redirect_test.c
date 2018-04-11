@@ -21,7 +21,7 @@ Test(analyse_redirect_1, check_value_1_redirect)
 	pipe->redirect = false;
 	pipe->error = EMPTY_ERR;
 	pipe->type_redirect = EMPTY_REDIR;
-	analyse_redirect(pipe);
+	analyse_redirect(false, pipe);
 	cr_assert_eq(pipe->valid, true);
 	cr_assert_eq(pipe->type_redirect, STDOUT_SIMPLE);
 	cr_assert_eq(pipe->error, EMPTY_ERR);
@@ -39,7 +39,7 @@ Test(analyse_redirect_2, check_value_2_invalid_redirect)
 	pipe->redirect = false;
 	pipe->error = EMPTY_ERR;
 	pipe->type_redirect = EMPTY_REDIR;
-	analyse_redirect(pipe);
+	analyse_redirect(false, pipe);
 	cr_assert_eq(pipe->valid, false);
 	cr_assert_eq(pipe->type_redirect, EMPTY_REDIR);
 	cr_assert_eq(pipe->error, AMBIGUOUS_REDIRECT);
@@ -57,7 +57,7 @@ Test(analyse_redirect_3, check_value_double_redirect)
 	pipe->redirect = false;
 	pipe->error = EMPTY_ERR;
 	pipe->type_redirect = EMPTY_REDIR;
-	analyse_redirect(pipe);
+	analyse_redirect(false, pipe);
 	cr_assert_eq(pipe->valid, true);
 	cr_assert_eq(pipe->type_redirect, STDOUT_DOUBLE);
 	cr_assert_eq(pipe->error, EMPTY_ERR);
@@ -75,7 +75,7 @@ Test(analyse_redirect_4, check_value_double_redirect)
 	pipe->redirect = false;
 	pipe->error = EMPTY_ERR;
 	pipe->type_redirect = EMPTY_REDIR;
-	analyse_redirect(pipe);
+	analyse_redirect(false, pipe);
 	cr_assert_eq(pipe->valid, true);
 	cr_assert_eq(pipe->type_redirect, STDIN_DOUBLE);
 	cr_assert_eq(pipe->error, EMPTY_ERR);
@@ -93,7 +93,7 @@ Test(analyse_redirect_5, check_value_double_redirect)
 	pipe->redirect = false;
 	pipe->error = EMPTY_ERR;
 	pipe->type_redirect = EMPTY_REDIR;
-	analyse_redirect(pipe);
+	analyse_redirect(false, pipe);
 	cr_assert_eq(pipe->valid, true);
 	cr_assert_eq(pipe->type_redirect, STDIN_SIMPLE);
 	cr_assert_eq(pipe->error, EMPTY_ERR);

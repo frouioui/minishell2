@@ -40,17 +40,18 @@ typedef struct shell_s {
 	bool bonus;
 } shell_t;
 
-int check_args(int argc);
-char **copy_environement(char **origin);
-shell_t *initialisation_shell(int argc, char **argv, char **env);
-char **copy_environement(char **origin);
-backup_t *initialisation_backup(char **env);
-unsigned int shell_loop(shell_t *shell);
-void display_prompt(shell_t *shell);
-void free_array_string(char **array);
-void update_backup(shell_t *shell);
-int destroy_shell(shell_t *shell);
-void write_command_history(bool bonus, command_line_t *command);
-bool is_bonus(int argc, char **argv);
+int check_args(int);
+char **copy_environement(char **);
+shell_t *initialisation_shell(int, char **, char **);
+char **copy_environement(char **);
+backup_t *initialisation_backup(char **);
+unsigned int shell_loop(shell_t *);
+unsigned int redirect_loop(shell_t *, char *);
+void display_prompt(shell_t *);
+void free_array_string(char **);
+void update_backup(shell_t *);
+int destroy_shell(shell_t *);
+void write_command_history(bool, command_line_t *);
+bool is_bonus(int, char **);
 
 #endif /* end of include guard: SHELL_H */

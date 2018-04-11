@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "shell.h"
 #include "instruction.h"
 
@@ -23,41 +24,42 @@ typedef struct redirect_flag_s {
 } redir_builtins_t;
 
 /* --- standard commands functions --- */
-unsigned int execute_command(shell_t *shell, command_line_t *command);
-void multiple_execution(shell_t *shell, instruction_t *instruction);
-void simple_execution(shell_t *shell, instruction_t *instruction);
-unsigned int execute_command(shell_t *shell, command_line_t *command);
-int **create_pipe(int nb);
-void check_end_exec(int stat);
-void exec_pipe(shell_t *shell, instruction_t *instruction, int **fd, pid_t);
-int dup_my_pipe(instruction_t *instruction, unsigned int actual, int **fd);
-void redirect_pipe(pipe_t *pipe);
-void display_error_execution(char *filename);
-char *get_path_exec(pipe_t *pipe, shell_t *shell);
-char *get_execution_file_path(char *exec, shell_t *shell);
-void exit_prog(int code);
-void simple_execution(shell_t *shell, instruction_t *instruction);
-void check_sig(shell_t *shell, int status);
-void bad_archi(shell_t *shell, char *arg);
-char *get_redirect_filename(pipe_t *pipe);
-void redirect_stdin_double(pipe_t *pipe_act);
+unsigned int execute_command(shell_t *, command_line_t *);
+void multiple_execution(shell_t *, instruction_t *);
+void simple_execution(shell_t *, instruction_t *);
+unsigned int execute_command(shell_t *, command_line_t *);
+int **create_pipe(int);
+void check_end_exec(int);
+void exec_pipe(shell_t *, instruction_t *, int **, pid_t);
+int dup_my_pipe(shell_t *, instruction_t *, unsigned int, int **);
+void redirect_pipe(bool, pipe_t *);
+void display_error_execution(char *);
+char *get_path_exec(pipe_t *, shell_t *);
+char *get_execution_file_path(char *, shell_t *);
+void exit_prog(int);
+void simple_execution(shell_t *, instruction_t *);
+void check_sig(shell_t *, int);
+void bad_archi(shell_t *, char *);
+char *get_redirect_filename(pipe_t *);
+void redirect_stdin_double(pipe_t *);
 
 /* --- builtins functions --- */
-int exec_builtins(shell_t *shell, pipe_t *pipe);
-bool is_builtins(char *arg);
-int cd_built(shell_t *shell, pipe_t *pipe);
-int env_built(shell_t *shell, pipe_t *pipe);
-int exit_built(shell_t *shell, pipe_t *pipe);
-int setenv_built(shell_t *shell, pipe_t *pipe);
-int unsetenv_built(shell_t *shell, pipe_t *pipe);
-void folder_error(shell_t *shell, int err, char *folder);
+int exec_builtins(shell_t *, pipe_t *);
+bool is_builtins(char *);
+int cd_built(shell_t *, pipe_t *);
+int env_built(shell_t *, pipe_t *);
+int exit_built(shell_t *, pipe_t *);
+int setenv_built(shell_t *, pipe_t *);
+int unsetenv_built(shell_t *, pipe_t *);
+void folder_error(shell_t *, int , char *);
 unsigned int check_rollback_path(shell_t *, char *, unsigned int);
-void go_home_cd(shell_t *shell);
-void go_back_cd(shell_t *shell);
-char *cd_special_cases(char *folder, char *env, int *changed);
-static char *get_name_variable(char *env, char *name, int *i);
-void save_old_pwd(char **env);
-void put_new_old_pwd(shell_t *shell, char *buffer);
-void restore_redirect(pipe_t *pipe);
+void go_home_cd(shell_t *);
+void go_back_cd(shell_t *);
+char *cd_special_cases(char *, char *, int *);
+static char *get_name_variable(char *, char *, int *);
+void save_old_pwd(char **);
+void put_new_old_pwd(shell_t *, char *);
+void restore_redirect(pipe_t *);
+char **realloc_env(char **, int, int);
 
 #endif /* end of include guard: EXECUTION_H */
