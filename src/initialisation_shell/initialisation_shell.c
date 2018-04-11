@@ -9,7 +9,7 @@
 #include "shell.h"
 #include "echec.h"
 
-shell_t *initialisation_shell(char **env)
+shell_t *initialisation_shell(int argc, char **argv, char **env)
 {
 	shell_t *shell = malloc(sizeof(shell_t));
 
@@ -21,6 +21,7 @@ shell_t *initialisation_shell(char **env)
 		shell->env = set_env_echec_mode();
 	if (shell->env == NULL)
 		return (NULL);
+	shell->bonus = argv != NULL ? is_bonus(argc, argv) : 0;
 	shell->backup = initialisation_backup(shell->env);
 	shell->command_line = NULL;
 	shell->code = 0;

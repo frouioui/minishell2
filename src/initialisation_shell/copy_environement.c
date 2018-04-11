@@ -12,7 +12,7 @@
 char **copy_environement(char **origin)
 {
 	unsigned int number_row = my_number_row(origin);
-	char **env = malloc(sizeof(char *) * (number_row * 10));
+	char **env = malloc(sizeof(char *) * (number_row + 1));
 
 	if (env == NULL)
 		return (NULL);

@@ -21,7 +21,7 @@ Test(analyse_redirect_6, check_value_invalid_redirect)
 	pipe->redirect = false;
 	pipe->error = EMPTY_ERR;
 	pipe->type_redirect = EMPTY_REDIR;
-	analyse_redirect(pipe);
+	analyse_redirect(false, pipe);
 	cr_assert_eq(pipe->valid, false);
 	cr_assert_eq(pipe->type_redirect, EMPTY_REDIR);
 	cr_assert_eq(pipe->error, INVALID_REDIRECT_NAME);

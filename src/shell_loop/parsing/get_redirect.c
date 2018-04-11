@@ -45,7 +45,7 @@ void check_stderr_redirect(pipe_t *pipe, char *inst, int *i)
 	}
 }
 
-static void scan_redirect(pipe_t *pipe, char *inst, int *i)
+static void scan_redirect(bool bonus, pipe_t *pipe, char *inst, int *i)
 {
 	if (inst[*i] == '>') {
 		if (inst[*i + 1] == '>' && SPACE_TAB(inst[*i + 2])) {
@@ -55,7 +55,7 @@ static void scan_redirect(pipe_t *pipe, char *inst, int *i)
 			pipe->type_redirect = STDOUT_SIMPLE;
 			*i = *i + 1;
 		}
-		check_stderr_redirect(pipe, inst, i);
+		bonus == true ? check_stderr_redirect(pipe, inst, i) : 0;
 	} else if (inst[*i] == '<') {
 		if (inst[*i + 1] == '<' && SPACE_TAB(inst[*i + 2])) {
 			pipe->type_redirect = STDIN_DOUBLE;
@@ -68,21 +68,21 @@ static void scan_redirect(pipe_t *pipe, char *inst, int *i)
 	check_after_redirect(pipe, inst, i);
 }
 
-unsigned int analyse_redirect(pipe_t *pipe)
+unsigned int analyse_redirect(bool bonus, pipe_t *pipe)
 {
 	for (int i = 0; pipe->full_instruction[i] && pipe->valid; i++) {
 		if (REDIRECT_CHAR(pipe->full_instruction[i])) {
-			scan_redirect(pipe, pipe->full_instruction, &i);
+			scan_redirect(bonus, pipe, pipe->full_instruction, &i);
 		}
 	}
 	return (0);
 }
 
-unsigned int get_redirect(pipe_t **pipe, unsigned int number_of_pipe)
+unsigned int get_redirect(bool bonus, pipe_t **pipe, unsigned int nb_of_pipe)
 {
-	for (unsigned int i = 0; i < number_of_pipe; i++) {
+	for (unsigned int i = 0; i < nb_of_pipe; i++) {
 		pipe[i]->redirect = false;
-		analyse_redirect(pipe[i]);
+		analyse_redirect(bonus, pipe[i]);
 	}
 	return (SUCCESS);
 }

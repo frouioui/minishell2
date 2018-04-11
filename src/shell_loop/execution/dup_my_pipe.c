@@ -11,28 +11,28 @@
 #include "execution.h"
 #include "instruction.h"
 
-static void dup_first(pipe_t *pipe, int *fd)
+static void dup_first(shell_t *shell, pipe_t *pipe, int *fd)
 {
 	if (dup2(fd[1], 1) == -1)
 		perror("dup");
 	if (pipe->redirect == true)
-		redirect_pipe(pipe);
+		redirect_pipe(shell->bonus, pipe);
 	close(fd[0]);
 }
 
-static void dup_last(pipe_t *pipe, int *fd)
+static void dup_last(shell_t *shell, pipe_t *pipe, int *fd)
 {
 	if (dup2(fd[0], 0) == -1)
 		perror("dup");
 	if (pipe->redirect == true)
-		redirect_pipe(pipe);
+		redirect_pipe(shell->bonus, pipe);
 	close(fd[1]);
 }
 
-static void dup_between(pipe_t *pipe, int *fd, int *fd2)
+static void dup_between(shell_t *shell, pipe_t *pipe, int *fd, int *fd2)
 {
 	if (pipe->redirect == true)
-		redirect_pipe(pipe);
+		redirect_pipe(shell->bonus, pipe);
 	if (pipe->type_redirect != STDOUT_SIMPLE &&
 	pipe->type_redirect != STDOUT_DOUBLE)
 		if (dup2(fd[1], 1) == -1)
@@ -45,14 +45,15 @@ static void dup_between(pipe_t *pipe, int *fd, int *fd2)
 	close(fd2[1]);
 }
 
-int dup_my_pipe(instruction_t *instruction, unsigned int actual, int **fd)
+int dup_my_pipe(shell_t *shell, instruction_t *instruction,
+	unsigned int actual, int **fd)
 {
 	if (actual == 0) {
-		dup_first(instruction->pipe[actual], fd[actual]);
+		dup_first(shell, instruction->pipe[actual], fd[actual]);
 	} else if (actual == instruction->number_of_pipe - 1) {
-		dup_last(instruction->pipe[actual], fd[actual - 1]);
+		dup_last(shell, instruction->pipe[actual], fd[actual - 1]);
 	} else {
-		dup_between(instruction->pipe[actual], fd[actual],
+		dup_between(shell, instruction->pipe[actual], fd[actual],
 		fd[actual - 1]);
 	}
 	return (0);

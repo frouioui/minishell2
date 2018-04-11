@@ -15,9 +15,10 @@ static char **update_env_variable(char **env, int pos, char *str)
 {
 	int i = 0;
 	int j = 0;
-	char *buffer = my_getenv_root(env[pos]);
+	char *buffer = NULL;
 
-	free(env[pos]);
+	env[pos] ? buffer = my_getenv_root(env[pos]) : 0;
+	env[pos] == NULL ? env[pos] = my_strcpy(NULL, str) : free(env[pos]);
 	env[pos] = malloc(sizeof(char) * (my_strlen(buffer) +
 					my_strlen(str) + 1));
 	while (buffer[i]) {
@@ -53,7 +54,7 @@ static char **add_env_variable(char **env, char **args, int pos)
 	int j = 0;
 	int i = 0;
 
-	env[pos] = malloc(sizeof(char) * (my_strlen(args[1]) +
+	env = realloc_env(env, pos, sizeof(char) * (my_strlen(args[1]) +
 			my_strlen(args[2]) + 10));
 	while (args[1][i]) {
 		env[pos][j] = args[1][i];

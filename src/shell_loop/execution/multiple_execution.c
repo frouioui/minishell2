@@ -60,6 +60,8 @@ void multiple_execution(shell_t *shell, instruction_t *instruction)
 	int *stat = malloc(sizeof(int) * (instruction->number_of_pipe + 2));
 	int actual = instruction->actual_pipe;
 
+	if (instruction->number_of_pipe > 2)
+		return;
 	if (!fd || !init_stat(stat, instruction) || (pid = fork()) == -1)
 		exit(84);
 	if (pid == 0) {

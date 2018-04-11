@@ -39,6 +39,7 @@ char *get_current_folder(shell_t *shell)
 		a++;
 	}
 	pwd != NULL ? folder[a] = '\0' : 0;
+	free(pwd);
 	return (folder);
 }
 

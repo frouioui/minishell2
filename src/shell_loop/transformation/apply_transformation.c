@@ -60,11 +60,15 @@ static char *get_history_command(char **args)
 	return (new);
 }
 
-char *apply_transformation(char *user_input)
+char *apply_transformation(bool bonus, char *user_input)
 {
-	char **args = cut_line(user_input);
-	char *buffer = my_strcpy(NULL, user_input);
+	char **args = NULL;
+	char *buffer = NULL;
 
+	if (bonus == false)
+		return (user_input);
+	args = cut_line(user_input);
+	buffer = my_strcpy(NULL, user_input);
 	if (args == NULL || buffer == NULL)
 		return (NULL);
 	if (my_strcmp(args[0], "hst") == 0 && args[1] != NULL) {

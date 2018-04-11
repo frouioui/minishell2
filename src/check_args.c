@@ -10,7 +10,7 @@
 
 int check_args(int argc)
 {
-	if (argc != 1) {
+	if (argc != 1 && argc != 2) {
 		my_putstr("You must give 0 arguments to the program.\n");
 		return (FAILURE);
 	}
