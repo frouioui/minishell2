@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2018
-** project
+** PSU_minishell2_2017
 ** File description:
-** pflorent
+** Display the error command not find.
 */
 
 #include "mylib.h"
