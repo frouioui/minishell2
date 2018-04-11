@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** minishell2
+** PSU_minishell2_2017
 ** File description:
 ** Check if args == 1 and init the shell then call the shell function.
 */

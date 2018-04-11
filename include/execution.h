@@ -55,7 +55,6 @@ unsigned int check_rollback_path(shell_t *, char *, unsigned int);
 void go_home_cd(shell_t *);
 void go_back_cd(shell_t *);
 char *cd_special_cases(char *, char *, int *);
-static char *get_name_variable(char *, char *, int *);
 void save_old_pwd(char **);
 void put_new_old_pwd(shell_t *, char *);
 void restore_redirect(pipe_t *);
