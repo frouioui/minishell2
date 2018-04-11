@@ -34,10 +34,8 @@ Test(copy_environement_2, bigger_environement)
 	"PATH=/bin", "TERM=/", "TOTO=toto", "PATH=/bin", "TERM=/", "TOTO=toto",
 	"PATH=/bin"};
 
-	for (int i = 0; i < 10; i++) {
-		env[i] = malloc(sizeof(char) * my_strlen(str[i]));
-		env[i] = my_strcpy(env[i], str[i]);
-	}
+	for (int i = 0; i < 10; i++)
+		env[i] = my_strcpy(NULL, str[i]);
 	copy = copy_environement(env);
 	cr_assert_str_eq(copy[0], "PATH=/bin");
 	cr_assert_str_eq(copy[1], "TERM=/");
