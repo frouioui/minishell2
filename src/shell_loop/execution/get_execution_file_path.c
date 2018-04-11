@@ -74,7 +74,7 @@ char *get_execution_file_path(char *exec, shell_t *shell)
 	int a = 0;
 
 	a = get_file_name(exec);
-	file == NULL ? exit_prog(84) : 0;
+	file == NULL ? exit(84) : 0;
 	roll_back > 0 && a > -1 ? roll_back_path(path, roll_back) : 0;
 	for (int i = 0; a > -1 && path[i]; i++) {
 		file[a] = path[i];

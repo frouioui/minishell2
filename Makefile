@@ -21,6 +21,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/write_command_history.c \
 	./src/shell_loop/free_command.c \
 	./src/shell_loop/update_backup.c \
+	./src/shell_loop/display_prompt.c \
 	./src/shell_loop/free_array_string.c \
 	./src/shell_loop/parsing/get_pipe_number.c \
 	./src/shell_loop/parsing/fill_up_instruction.c \
@@ -28,7 +29,6 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/parsing/get_redirect.c \
 	./src/shell_loop/parsing/check_env_variable.c \
 	./src/shell_loop/parsing/fix_extra_space.c \
-	./src/shell_loop/display_prompt.c \
 	./src/shell_loop/execution/builtins/cd_built.c \
 	./src/shell_loop/execution/builtins/env_built.c \
 	./src/shell_loop/execution/builtins/setenv_built.c \
@@ -51,7 +51,6 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/execution/dup_my_pipe.c \
 	./src/shell_loop/execution/get_path_exec.c \
 	./src/shell_loop/execution/get_execution_file_path.c \
-	./src/shell_loop/execution/exit_prog.c \
 	./src/shell_loop/execution/simple_execution.c \
 	./src/shell_loop/execution/check_sig.c \
 	./src/shell_loop/execution/display_error_instruction.c \
@@ -86,7 +85,8 @@ SRCS_TEST	= ./tests/get_next_line_test.c \
 		./tests/setenv_crash_test.c \
 		./tests/write_history_test.c \
 		./tests/transforme_cmd_test.c \
-		./tests/destroy_shell_test.c
+		./tests/destroy_shell_test.c \
+		./tests/display_prompt_test.c \
 
 LIB	= ./lib/my_putchar.c \
 	./lib/get_next_line.c \
@@ -128,6 +128,9 @@ show_coverage:
 	lcov --directory ./ -c -o rapport.info
 	genhtml -o ./report -t "code coverage report" rapport.info
 	xdg-open ./report/index.html &>/dev/null
+
+wc:
+	wc $(SRCS) $(SRCS_TEST) $(LIB) $(SRC_MAIN)
 
 clean:
 	$(RM) $(OBJS)
