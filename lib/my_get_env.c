@@ -31,7 +31,8 @@ char *my_get_env(char **env, char *target)
 	while (env[i] != NULL) {
 		while (env[i][a] == target[a] && target[a] != '\0')
 			a++;
-		if (target[a] == '\0' && env[i][a - 1] == target[a - 1]) {
+		if (target[a] == '\0' && env[i][a] == '=' &&
+		env[i][a - 1] == target[a - 1]) {
 			elem = copy_elem(env[i], a + 1);
 			return (elem);
 		} else {
