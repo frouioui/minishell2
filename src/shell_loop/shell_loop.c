@@ -22,12 +22,12 @@ bool is_empty_input(char *user_input)
 static unsigned int redirect_loop(shell_t *shell, char *user_input)
 {
 	if (is_empty_input(user_input) == true) {
-		user_input = apply_transformation(user_input);
+		user_input = apply_transformation(shell->bonus, user_input);
 		shell->command_line = get_command_line(user_input, shell->env);
 		if (shell->command_line == NULL)
 			return (FAILURE);
 		shell->code = execute_command(shell, shell->command_line);
-		write_command_history(shell->command_line);
+		write_command_history(shell->bonus, shell->command_line);
 		free_command(shell->command_line);
 		update_backup(shell);
 		free(user_input);

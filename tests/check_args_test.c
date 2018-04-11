@@ -27,3 +27,8 @@ Test(check_args_3, negative_number_args)
 	cr_assert_eq(check_args(0), FAILURE);
 	cr_assert_stdout_eq_str("You must give 0 arguments to the program.\n");
 }
+
+Test(check_args_4, valid_args)
+{
+	cr_assert_eq(check_args(2), SUCCESS);
+}

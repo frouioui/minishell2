@@ -26,7 +26,7 @@ Test(execute_command_6, simple_redirection, .timeout = 0.2)
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
-	shell = initialisation_shell(env);
+	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
 	shell->command_line = get_command_line("echo toto > i", shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
@@ -48,7 +48,7 @@ Test(execute_command_7, simple_and_double_redirection, .timeout = 0.2)
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
-	shell = initialisation_shell(env);
+	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
 	shell->command_line = get_command_line("echo toto > a", shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
@@ -71,7 +71,7 @@ Test(execute_command_8, simple_redirection_input, .timeout = 0.2)
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
-	shell = initialisation_shell(env);
+	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
 	shell->command_line = get_command_line("echo toto > y", shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
@@ -92,7 +92,7 @@ Test(execute_command_9, simple_redirection_input, .timeout = 0.2)
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
-	shell = initialisation_shell(env);
+	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
 	shell->command_line = get_command_line("echo toto > u", shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);

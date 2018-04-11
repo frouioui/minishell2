@@ -22,7 +22,7 @@ Test(initialisation_shell_1, check_value, .timeout = 2)
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
-	shell = initialisation_shell(env);
+	shell = initialisation_shell(1, NULL, env);
 	cr_assert_not_null(shell);
 	cr_assert_str_eq(shell->backup->path, "/bin");
 	cr_assert_str_eq(shell->backup->current_pwd, "/home/marvin");
@@ -39,7 +39,7 @@ Test(initialisation_shell_2, check_echec_mode, .timeout = 1)
 	shell_t *shell = NULL;
 	char echec[4][90] = ENV_ECHEC;
 
-	shell = initialisation_shell(NULL);
+	shell = initialisation_shell(1, NULL, NULL);
 	cr_assert_str_eq(shell->backup->path, "/usr/local/sbin:/usr/local/"\
 		"bin:/usr/sbin:/usr/bin:/sbin:/bin");
 	cr_assert_str_eq(shell->backup->current_pwd, "/");

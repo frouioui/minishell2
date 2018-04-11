@@ -13,6 +13,7 @@ SRCS	= ./src/check_args.c \
 	./src/initialisation_shell/initialisation_shell.c \
 	./src/initialisation_shell/set_env_echec_mode.c \
 	./src/initialisation_shell/initialisation_backup.c \
+	./src/initialisation_shell/is_bonus_shell.c \
 	./src/shell_loop/transformation/apply_transformation.c \
 	./src/shell_loop/parsing/get_command_line.c \
 	./src/shell_loop/parsing/get_number_instruction.c \
