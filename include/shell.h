@@ -47,7 +47,7 @@ char **copy_environement(char **);
 backup_t *initialisation_backup(char **);
 unsigned int shell_loop(shell_t *);
 unsigned int redirect_loop(shell_t *, char *);
-void display_prompt(shell_t *);
+int display_prompt(shell_t *shell);
 void free_array_string(char **);
 void update_backup(shell_t *);
 int destroy_shell(shell_t *);

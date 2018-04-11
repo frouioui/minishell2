@@ -43,7 +43,7 @@ char *get_current_folder(shell_t *shell)
 	return (folder);
 }
 
-void display_prompt(shell_t *shell)
+int display_prompt(shell_t *shell)
 {
 	char *user = get_current_user(shell);
 	char *folder = get_current_folder(shell);
@@ -60,4 +60,5 @@ void display_prompt(shell_t *shell)
 	folder != NULL ? free(folder) : 0;
 	folder != NULL ? free(host) : 0;
 	folder != NULL ? free(user) : 0;
+	return (1);
 }

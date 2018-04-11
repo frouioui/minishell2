@@ -40,11 +40,10 @@ unsigned int shell_loop(shell_t *shell)
 {
 	char *user_input = NULL;
 
-	display_prompt(shell);
-	while (shell->state == OK && (user_input = get_next_line(0)) != NULL) {
+	while (shell->state == OK && display_prompt(shell) &&
+		(user_input = get_next_line(0)) != NULL) {
 		if (redirect_loop(shell, user_input) == FAILURE)
 			return (FAILURE);
-		display_prompt(shell);
 	}
 	return (SUCCESS);
 }
