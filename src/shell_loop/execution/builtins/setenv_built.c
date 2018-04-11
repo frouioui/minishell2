@@ -21,10 +21,8 @@ static char **update_env_variable(char **env, int pos, char *str)
 	env[pos] == NULL ? env[pos] = my_strcpy(NULL, str) : free(env[pos]);
 	env[pos] = malloc(sizeof(char) * (my_strlen(buffer) +
 					my_strlen(str) + 1));
-	while (buffer[i]) {
+	for (i = 0; buffer[i]; i++)
 		env[pos][i] = buffer[i];
-		i++;
-	}
 	while (str[j]) {
 		env[pos][i] = str[j];
 		j++;

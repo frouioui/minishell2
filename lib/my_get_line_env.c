@@ -46,5 +46,5 @@ unsigned int get_line_env_zero(char **env, char *target)
 		else
 			return (line);
 	}
-	return (0);
+	return (line);
 }

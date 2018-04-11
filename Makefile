@@ -106,7 +106,7 @@ OBJS	= $(LIB:.c=.o) \
 	$(SRC_MAIN:.c=.o)
 
 CFLAGS = -I ./include/
-CFLAGS += -W -Wextra
+CFLAGS += -W -Wextra -g3
 
 TEST_FLAGS = -I ./include/ -lcriterion --coverage
 
