@@ -36,7 +36,6 @@ void redirect_pipe(bool, pipe_t *);
 void display_error_execution(char *);
 char *get_path_exec(pipe_t *, shell_t *);
 char *get_execution_file_path(char *, shell_t *);
-void exit_prog(int);
 void simple_execution(shell_t *, instruction_t *);
 void check_sig(shell_t *, int);
 void bad_archi(shell_t *, char *);

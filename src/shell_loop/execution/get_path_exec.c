@@ -44,7 +44,7 @@ static char *get_path_builtin(char *path, char *file, shell_t *shell)
 	int max = my_strlen(path);
 
 	if (path == NULL)
-		exit_prog(84);
+		exit(84);
 	while (i < max && path_ok == NULL) {
 		path_ok = get_test_path(path, file, &i);
 		i++;

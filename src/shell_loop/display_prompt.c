@@ -50,14 +50,14 @@ void display_prompt(shell_t *shell)
 	char *host = get_current_host(shell);
 
 	my_putstr("[");
-	user != NULL ? my_putstr(user) : my_putstr("anonym");
+	user != NULL ? my_putstr(user) : my_putstr("anonyme");
 	my_putstr("@");
 	host != NULL ? my_putstr(host) : my_putstr("localhost");
 	my_putstr("]");
 	my_putstr(" -> ");
 	folder != NULL ? my_putstr(folder) : 0;
 	my_putstr(" $ ");
-	free(folder);
-	free(host);
-	free(user);
+	folder != NULL ? free(folder) : 0;
+	folder != NULL ? free(host) : 0;
+	folder != NULL ? free(user) : 0;
 }
