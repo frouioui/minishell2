@@ -42,6 +42,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/execution/builtins/error_wrong_folder.c \
 	./src/shell_loop/execution/builtins/save_old_pwd.c \
 	./src/shell_loop/execution/builtins/realloc_env.c \
+	./src/shell_loop/execution/builtins/destroy_cd_resources.c \
 	./src/shell_loop/execution/get_redirected.c \
 	./src/shell_loop/execution/multiple_execution.c \
 	./src/shell_loop/execution/execute_command.c \
