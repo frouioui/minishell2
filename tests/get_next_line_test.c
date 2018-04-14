@@ -22,3 +22,15 @@ Test(get_next_line_1, test_small_file)
 		}
 	}
 }
+
+Test(get_next_line_2, test_small_file)
+{
+	int fd = open("./tests/test_gnl_2", O_RDONLY);
+	char tab[2][20] = {"ls", "env"};
+
+	if (fd != 1) {
+		for (int line = 0; line < 2; line++) {
+			cr_assert_str_eq(get_next_line(fd), tab[line]);
+		}
+	}
+}

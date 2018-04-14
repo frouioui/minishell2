@@ -30,6 +30,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/parsing/get_redirect.c \
 	./src/shell_loop/parsing/check_env_variable.c \
 	./src/shell_loop/parsing/fix_extra_space.c \
+	./src/shell_loop/parsing/check_quote.c \
 	./src/shell_loop/execution/builtins/cd_built.c \
 	./src/shell_loop/execution/builtins/env_built.c \
 	./src/shell_loop/execution/builtins/setenv_built.c \
