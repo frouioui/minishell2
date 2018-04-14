@@ -78,6 +78,5 @@ void fix_extra_spaces(char *);
 void display_error_instruction(instruction_t *);
 bool is_empty_input(char *);
 char *apply_transformation(bool, char *);
-void remove_quote(char **args);
 
 #endif /* end of include guard: INSTRUCTION_H */

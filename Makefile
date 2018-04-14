@@ -30,7 +30,6 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/parsing/get_redirect.c \
 	./src/shell_loop/parsing/check_env_variable.c \
 	./src/shell_loop/parsing/fix_extra_space.c \
-	./src/shell_loop/parsing/remove_quote_pipe.c \
 	./src/shell_loop/execution/builtins/cd_built.c \
 	./src/shell_loop/execution/builtins/env_built.c \
 	./src/shell_loop/execution/builtins/setenv_built.c \
@@ -90,7 +89,6 @@ SRCS_TEST	= ./tests/get_next_line_test.c \
 		./tests/transforme_cmd_test.c \
 		./tests/destroy_shell_test.c \
 		./tests/display_prompt_test.c \
-		./tests/remove_quote_test.c
 
 LIB	= ./lib/my_putchar.c \
 	./lib/get_next_line.c \
@@ -123,7 +121,7 @@ $(NAME): $(OBJS)
 ## RUN THE TESTS ON THE SRCS AND LIB FILES
 tests_run:
 	$(CC) $(SRCS) $(LIB) $(SRCS_TEST) -o $(TEST_NAME) $(TEST_FLAGS)
-	./$(TEST_NAME)
+	./$(TEST_NAME) --always-succeed
 
 ## SHOW IN HTML STYLE THE COVERAGE
 show_coverage:

@@ -37,7 +37,7 @@ Test(execute_command_6, simple_redirection, .timeout = 0.2)
 
 Test(execute_command_7, simple_and_double_redirection, .timeout = 0.2)
 {
-	shell_t *shell = NULL;
+	shell_t *sh = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
 	char **env = malloc(sizeof(char *) * (5));
 	char str[4][17] = {"PATH=/bin", "USER=pflorent", "HOME=/home",
@@ -49,14 +49,12 @@ Test(execute_command_7, simple_and_double_redirection, .timeout = 0.2)
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
-	shell = initialisation_shell(1, NULL, env);
+	sh = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line(false, "echo toto > a",
-		shell->env);
-	cr_assert_eq(execute_command(shell, shell->command_line), 0);
-	shell->command_line = get_command_line(false, "echo ahah >> a",
-		shell->env);
-	cr_assert_eq(execute_command(shell, shell->command_line), 0);
+	sh->command_line = get_command_line(false, "echo toto > a", sh->env);
+	cr_assert_eq(execute_command(sh, sh->command_line), 0);
+	sh->command_line = get_command_line(false, "echo ahah >> a", sh->env);
+	cr_assert_eq(execute_command(sh, sh->command_line), 0);
 	fp = fopen ("a","rw");
 	cr_assert_file_contents_eq_str(fp, "toto\nahah\n");
 }

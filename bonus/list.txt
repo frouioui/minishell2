@@ -3,6 +3,7 @@ Shell script.
 Continuous integration (scripts, Jenkins, ...).
 Saving history.
 New builtins "hst" access and execute a command from the history.
+Ability to use the environement variable (ex: ls $HOME)
 Redirection inside pipes.
 Custom prompt.
 Special flag to activate bonuses "--bonus".
