@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include "shell.h"
 #include "mylib.h"
 
@@ -49,14 +50,18 @@ int display_prompt(shell_t *shell)
 	char *folder = get_current_folder(shell);
 	char *host = get_current_host(shell);
 
-	my_putstr("[");
-	user != NULL ? my_putstr(user) : my_putstr("anonyme");
-	my_putstr("@");
-	host != NULL ? my_putstr(host) : my_putstr("localhost");
-	my_putstr("]");
-	my_putstr(" -> ");
-	folder != NULL ? my_putstr(folder) : 0;
-	my_putstr(" $ ");
+	if (shell->bonus == false && isatty(1)) {
+		my_putstr("[");
+		user != NULL ? my_putstr(user) : my_putstr("anonyme");
+		my_putstr("@");
+		host != NULL ? my_putstr(host) : my_putstr("localhost");
+		my_putstr("]");
+		my_putstr(" -> ");
+		folder != NULL ? my_putstr(folder) : 0;
+		my_putstr(" $ ");
+	} else if (isatty(1)) {
+		display_bonus_prompt(shell->code, user, folder, host);
+	}
 	folder != NULL ? free(folder) : 0;
 	folder != NULL ? free(host) : 0;
 	folder != NULL ? free(user) : 0;

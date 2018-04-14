@@ -53,5 +53,6 @@ void update_backup(shell_t *);
 int destroy_shell(shell_t *);
 void write_command_history(bool, command_line_t *);
 bool is_bonus(int, char **);
+void display_bonus_prompt(int, char *, char *, char *);
 
 #endif /* end of include guard: SHELL_H */
