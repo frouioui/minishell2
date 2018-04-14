@@ -1,0 +1,11 @@
+Error output redirection.
+Shell script.
+Continuous integration (scripts, Jenkins, ...).
+Saving history.
+New builtins "hst" access and execute a command from the history.
+Redirection inside pipes.
+Custom prompt.
+Special flag to activate bonuses "--bonus".
+Web page on how to use the shell.
+Over 80 different tests.
+About 90% of coverage for more than 4000 lines of code.

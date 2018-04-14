@@ -50,7 +50,7 @@ int env_built(shell_t *, pipe_t *);
 int exit_built(shell_t *, pipe_t *);
 int setenv_built(shell_t *, pipe_t *);
 int unsetenv_built(shell_t *, pipe_t *);
-void folder_error(shell_t *, int , char *);
+void folder_error(shell_t *, int, char *);
 unsigned int check_rollback_path(shell_t *, char *, unsigned int);
 void go_home_cd(shell_t *);
 void go_back_cd(shell_t *);
@@ -59,5 +59,6 @@ void save_old_pwd(char **);
 void put_new_old_pwd(shell_t *, char *);
 void restore_redirect(pipe_t *);
 char **realloc_env(char **, int, int);
+int destroy_cd_resources(char *);
 
 #endif /* end of include guard: EXECUTION_H */

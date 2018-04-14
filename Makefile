@@ -21,8 +21,9 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/write_command_history.c \
 	./src/shell_loop/free_command.c \
 	./src/shell_loop/update_backup.c \
-	./src/shell_loop/display_prompt.c \
 	./src/shell_loop/free_array_string.c \
+	./src/shell_loop/prompt/display_bonus_prompt.c \
+	./src/shell_loop/prompt/display_prompt.c \
 	./src/shell_loop/parsing/get_pipe_number.c \
 	./src/shell_loop/parsing/fill_up_instruction.c \
 	./src/shell_loop/parsing/get_pipe.c \
@@ -42,6 +43,7 @@ SRCS	= ./src/check_args.c \
 	./src/shell_loop/execution/builtins/error_wrong_folder.c \
 	./src/shell_loop/execution/builtins/save_old_pwd.c \
 	./src/shell_loop/execution/builtins/realloc_env.c \
+	./src/shell_loop/execution/builtins/destroy_cd_resources.c \
 	./src/shell_loop/execution/get_redirected.c \
 	./src/shell_loop/execution/multiple_execution.c \
 	./src/shell_loop/execution/execute_command.c \
@@ -108,7 +110,7 @@ OBJS	= $(LIB:.c=.o) \
 	$(SRC_MAIN:.c=.o)
 
 CFLAGS = -I ./include/
-CFLAGS += -W -Wextra -g3
+CFLAGS += -W -Wextra
 
 TEST_FLAGS = -I ./include/ -lcriterion --coverage
 
