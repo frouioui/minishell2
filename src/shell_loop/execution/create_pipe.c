@@ -19,8 +19,11 @@ int **create_pipe(int nb)
 		if (fd[i] == NULL)
 			return (NULL);
 		fd[i + 1] = NULL;
-		if (pipe(fd[i]) == -1)
+		if (pipe(fd[i]) == -1) {
+			perror("pipe");
+			exit(84);
 			return (NULL);
+		}
 	}
 	return (fd);
 }
