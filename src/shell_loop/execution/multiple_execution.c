@@ -13,6 +13,7 @@
 #include "shell.h"
 #include "instruction.h"
 #include "execution.h"
+#include "mylib.h"
 
 static void wait_all(int *stat, shell_t *shell, instruction_t *inst, int **fd)
 {
@@ -62,7 +63,7 @@ void multiple_execution(shell_t *shell, instruction_t *instruction)
 
 	if (instruction->number_of_pipe > 2) {
 		my_putstr("too many pipes in here.\n");
-		return;
+		exit(84);
 	}
 	fd = create_pipe(instruction->number_of_pipe);
 	if (fd == NULL)
